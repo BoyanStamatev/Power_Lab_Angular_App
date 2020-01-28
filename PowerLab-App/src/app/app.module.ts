@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from './components/shared.module';
-
 import { AppComponent } from './app.component';
+import { SharedModule } from './components/shared.module';
 import { HomeComponent } from './components/home/home.component';
+import { ProductsModule } from './components/products/products.module';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { HomeComponent } from './components/home/home.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ProductsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

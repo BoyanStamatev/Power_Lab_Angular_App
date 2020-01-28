@@ -4,8 +4,6 @@ import { RouterModule } from '@angular/router';
 import { sharedComponents } from '.';
 
 
-
-
 @NgModule({
   declarations: [
     ...sharedComponents,
