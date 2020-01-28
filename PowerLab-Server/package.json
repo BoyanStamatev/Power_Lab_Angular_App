@@ -1,10 +1,10 @@
 {
   "name": "poewr-lab-system",
   "version": "0.0.1",
-  "description": "poewr Lab",
+  "description": "Power Lab",
   "main": "index.js",
   "keywords": [
-    "poewr",
+    "power",
     "system"
   ],
   "author": "BoyanStamatev",

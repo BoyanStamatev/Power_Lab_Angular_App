@@ -8,7 +8,7 @@ import { sharedComponents } from '.';
 
 @NgModule({
   declarations: [
-    ...sharedComponents
+    ...sharedComponents,
   ],
   imports: [
     CommonModule,
