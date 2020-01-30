@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterModalComponent } from '../../authentication/register-modal/register-modal.component';
 import { LoginModalComponent } from '../../authentication/login-modal/login-modal.component';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-navigation',
@@ -10,6 +12,9 @@ import { LoginModalComponent } from '../../authentication/login-modal/login-moda
 })
 export class NavigationComponent implements OnInit {
 
+  public faLogin = faSignInAlt
+  public faRegister = faUserPlus
+  
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
