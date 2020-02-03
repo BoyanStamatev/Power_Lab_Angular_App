@@ -1,21 +1,28 @@
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators'
 import * as jwt_decode from '../../../../node_modules/jwt-decode'
+import { AppState } from '../store/app.state';
+import { Store, select } from '@ngrx/store';
+import AuthenticationDataModel from '../models/AuthnticationDataModel';
+import { Authenticate } from '../store/authentication/authentication.actions';
 
 
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
 
+    private authtoken: string
+
     constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService,
+        private store: Store<AppState>,
         private toastr: ToastrService
-    ) { }
+    ) { 
+
+        this.store.pipe(select(state => state.authenticationState.token))
+        .subscribe(data => this.authtoken = data)
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -23,7 +30,7 @@ export class JWTInterceptor implements HttpInterceptor {
 
             req = req.clone({
                 setHeaders: {
-                    'Authorization': `Bearer ${this.authenticationService.getToken}`
+                    'Authorization': `Bearer ${this.authtoken}`
                 }
             })
         }
@@ -40,7 +47,6 @@ export class JWTInterceptor implements HttpInterceptor {
 
         if(this.decodeToken(data.token)) {
             const authtoken = data.token
-            // Action
             localStorage.setItem('authtoken', authtoken)
             this.toastr.success(data.message)
         } else {
@@ -50,7 +56,9 @@ export class JWTInterceptor implements HttpInterceptor {
 
     private decodeToken(token) {
         try {
-            jwt_decode(token)
+            const decoded = jwt_decode(token)
+            const authData = new AuthenticationDataModel(token, decoded.username, decoded.isAdmin, true)
+            this.store.dispatch(new Authenticate(authData))
             return true
         } catch {
             return false

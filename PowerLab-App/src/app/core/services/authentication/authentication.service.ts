@@ -5,6 +5,10 @@ import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { RegisterModel } from '../../../components/authentication/models/RegisterModel'
 import { LoginModel } from '../../../components/authentication/models/LoginModel'
+import { AppState } from '../../store/app.state'
+import { Store, select } from '@ngrx/store'
+import { Authenticate, Deauthenticate } from '../../store/authentication/authentication.actions'
+import AuthenticationDataModel from '../../models/AuthnticationDataModel'
 
 const loginUrl = 'http://localhost:5000/auth/login'
 const registerUrl = 'http://localhost:5000/auth/signup'
@@ -12,10 +16,15 @@ const registerUrl = 'http://localhost:5000/auth/signup'
 @Injectable()
 export class AuthenticationService {
 
+  private username: string
+  private isUserAdmin : boolean
+  private isUserAuthenticated: boolean
+
   constructor(
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store<AppState>
   ) { 
 
     if (localStorage.getItem('authtoken')) {
@@ -24,25 +33,25 @@ export class AuthenticationService {
       try{
         const decoded = jwt_decode(authtoken)
         if (!this.isTokenExpired(decoded)) {
-          // Dispach action Save token
+
+          const authData = new AuthenticationDataModel(authtoken, decoded.username, decoded.isAdmin, true)
+
+          this.store.dispatch(new Authenticate(authData))
+
+          this.store.pipe(select(state => state.authenticationState.username))
+          .subscribe(data => this.username = data)
+
+          this.store.pipe(select(state => state.authenticationState.isAdmin))
+          .subscribe(data => this.isUserAdmin = data)
+
+          this.store.pipe(select(state => state.authenticationState.isAuthenticated))
+          .subscribe(data => this.isUserAuthenticated  = data)
         }
       } catch (err){
         this.toastr.error('Invalid token', 'Warning!')
       }
 
     }
-  }
-
-
-  isTokenExpired(token): boolean {
-    if(token.exp === undefined) {
-      return false
-    }
-
-    const date = new Date(0)
-    date.setUTCSeconds(token.exp)
-
-    return !(date.valueOf() > new Date().valueOf())
   }
 
   register(body: RegisterModel) {
@@ -55,21 +64,21 @@ export class AuthenticationService {
 
   logout() {
     localStorage.clear()
-    // dispatch action to remove token
+    this.store.dispatch(new Deauthenticate)
     this.toastr.success('Logout successful!')
     this.router.navigate(['/'])
   }
 
   isAuthenticated () {
-    // check the store
+    return this.isUserAuthenticated
   }
 
   isAdmin () {
-    // check the store
+    return this.isUserAdmin
   }
 
   getUsername () {
-    // get it from the store
+    return this.username
   }
 
   getToken() {
@@ -77,5 +86,15 @@ export class AuthenticationService {
     return token
   }
 
+  isTokenExpired(token): boolean {
+    if(token.exp === undefined) {
+      return false
+    }
+
+    const date = new Date(0)
+    date.setUTCSeconds(token.exp)
+
+    return !(date.valueOf() > new Date().valueOf())
+  }
 
 }

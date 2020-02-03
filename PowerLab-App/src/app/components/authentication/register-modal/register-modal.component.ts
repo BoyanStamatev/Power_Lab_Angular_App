@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { RegisterModel } from '../models/RegisterModel';
 
 @Component({
   selector: 'app-register-modal',
@@ -13,7 +16,12 @@ export class RegisterModalComponent implements OnInit {
   public registerForm
   public faWindowClose = faWindowClose
   
-  constructor(public formBuilder: FormBuilder, public activeModal: NgbActiveModal) { }
+  constructor(
+    public formBuilder: FormBuilder, 
+    public activeModal: NgbActiveModal,
+    private authService: AuthenticationService,
+    private toastrService: ToastrService
+    ) { }
 
   ngOnInit() {
      this.registerForm = this.formBuilder.group({
@@ -31,7 +39,11 @@ export class RegisterModalComponent implements OnInit {
   get confirmPassword() { return this.registerForm.get('confirmPassword') }
 
   public submitForm() {
-    this.activeModal.close(this.registerForm.value)
+    const formValue = this.registerForm.value
+    const registerModel: RegisterModel = {username: formValue.username, email:formValue.email, password:formValue.password} 
+    this.authService.register(registerModel).subscribe(() => {
+      this.activeModal.close()
+    })
   }
 
 }

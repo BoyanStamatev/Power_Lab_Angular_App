@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { LoginModel } from '../models/LoginModel';
 
 @Component({
   selector: 'app-login-modal',
@@ -13,7 +15,11 @@ export class LoginModalComponent implements OnInit {
   public loginForm
   public faWindowClose = faWindowClose
   
-  constructor(public formBuilder: FormBuilder, public activeModal: NgbActiveModal) { }
+  constructor(
+    public formBuilder: FormBuilder, 
+    public activeModal: NgbActiveModal,
+    private authService: AuthenticationService
+    ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -27,7 +33,11 @@ export class LoginModalComponent implements OnInit {
   get password() { return this.loginForm.get('password') }
 
   public submitForm() {
-    this.activeModal.close(this.loginForm.value)
+    this.authService.login(this.loginForm.value).subscribe(() => {
+      const formValue = this.loginForm.value
+      const loginModel: LoginModel = {email: formValue.email, password: formValue.password}
+      this.authService.login(loginModel).subscribe(() => this.activeModal.close())
+    })
   }
 }
 
