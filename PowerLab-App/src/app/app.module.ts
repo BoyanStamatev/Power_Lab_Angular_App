@@ -15,9 +15,16 @@ import { HomeComponent } from './components/home/home.component'
 import { ProductsModule } from './components/products/products.module'
 import { JWTInterceptor, ErrorInterceptor } from './core/interceptors'
 import { ToastrModule } from 'ngx-toastr'
-import { StoreModule } from '@ngrx/store'
+import { StoreModule, ActionReducer } from '@ngrx/store'
+import { AppState } from './core/store/app.state'
+import { storeLogger } from 'ngrx-store-logger'
 import { appReducers } from './core/store/app.reducers'
 
+import { environment } from '../environments/environment'
+export function logger(reducer: ActionReducer<AppState>): any {
+  return storeLogger()(reducer)
+}
+export const metaReducers = environment.production ? [] : [logger]
 
 
 @NgModule({
@@ -33,7 +40,7 @@ import { appReducers } from './core/store/app.reducers'
     RouterModule,
     HttpClientModule,
     FontAwesomeModule,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(appReducers, {metaReducers}),
     ToastrModule.forRoot(),
     ServicesModule,
     AuthenticationModule,

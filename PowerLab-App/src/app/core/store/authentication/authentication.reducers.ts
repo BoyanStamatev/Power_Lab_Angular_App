@@ -14,7 +14,7 @@ export function AuthenticationReducer (state: AuthenticationState = initialState
         case AUTHENTICATE:
             return action.payload
         case DEAUTHENTICATE:
-            return state
+            return initialState
         default:
             return state
     }

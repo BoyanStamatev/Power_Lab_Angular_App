@@ -20,7 +20,7 @@ export class JWTInterceptor implements HttpInterceptor {
         private toastr: ToastrService
     ) { 
 
-        this.store.pipe(select(state => state.authenticationState.token))
+        this.store.pipe(select(state => state.authentication.token))
         .subscribe(data => this.authtoken = data)
     }
 
@@ -39,6 +39,10 @@ export class JWTInterceptor implements HttpInterceptor {
             if(res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/signup')) {
                 this.saveToken(res.body)
             }
+
+            if (res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/signup')) {
+                this.toastr.success(res.body.message)
+              }
         }))
 
     }

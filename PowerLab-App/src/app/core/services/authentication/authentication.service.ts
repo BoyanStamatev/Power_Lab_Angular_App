@@ -37,19 +37,19 @@ export class AuthenticationService {
           const authData = new AuthenticationDataModel(authtoken, decoded.username, decoded.isAdmin, true)
 
           this.store.dispatch(new Authenticate(authData))
-
-          this.store.pipe(select(state => state.authenticationState.username))
-          .subscribe(data => this.username = data)
-
-          this.store.pipe(select(state => state.authenticationState.isAdmin))
-          .subscribe(data => this.isUserAdmin = data)
-
-          this.store.pipe(select(state => state.authenticationState.isAuthenticated))
-          .subscribe(data => this.isUserAuthenticated  = data)
         }
       } catch (err){
         this.toastr.error('Invalid token', 'Warning!')
       }
+
+      this.store.pipe(select(state => state.authentication.username))
+      .subscribe(data => this.username = data)
+
+      this.store.pipe(select(state => state.authentication.isAdmin))
+      .subscribe(data => this.isUserAdmin = data)
+
+      this.store.pipe(select(state => state.authentication.isAuthenticated))
+      .subscribe(data => this.isUserAuthenticated  = data)
 
     }
   }
