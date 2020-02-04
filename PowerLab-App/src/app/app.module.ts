@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component'
 import { ProductsModule } from './components/products/products.module'
 import { JWTInterceptor, ErrorInterceptor } from './core/interceptors'
 import { ToastrModule } from 'ngx-toastr'
+import { GuardsModule } from './core/guards/guards.module'
 import { StoreModule, ActionReducer } from '@ngrx/store'
 import { AppState } from './core/store/app.state'
 import { storeLogger } from 'ngrx-store-logger'
@@ -46,6 +47,7 @@ export const metaReducers = environment.production ? [] : [logger]
     AuthenticationModule,
     SharedModule,
     ProductsModule,
+    GuardsModule
 
   ],
   providers: [
