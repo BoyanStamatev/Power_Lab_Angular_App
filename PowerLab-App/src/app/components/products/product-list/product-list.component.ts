@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProductsModule } from '../products.module';
 
 @Component({
   selector: 'app-product-list',
@@ -7,20 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  public products
+  @Input() public products$: Observable<ProductsModule[]>
+
+  public pageSize: number = 6
+  public currentPage: number = 1
 
   constructor() { }
 
   ngOnInit() {
-    this.products = [
-      {name: 'P1'},
-      {name: 'P2'},
-      {name: 'P3'},
-      {name: 'P4'},
-      {name: 'P5'},
-      {name: 'P6'},
-    ]
+    
+  }
 
+  changePage(page) {
+    this.currentPage = page
   }
 
 }
