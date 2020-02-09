@@ -49,7 +49,7 @@ export class AuthenticationService {
       .subscribe(data => this.isUserAdmin = data)
 
       this.store.pipe(select(state => state.authentication.isAuthenticated))
-      .subscribe(data => this.isUserAuthenticated  = data)
+      .subscribe(data => this.isUserAuthenticated = data)
 
     }
   }

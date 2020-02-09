@@ -20,6 +20,7 @@ import { StoreModule, ActionReducer } from '@ngrx/store'
 import { AppState } from './core/store/app.state'
 import { storeLogger } from 'ngrx-store-logger'
 import { appReducers } from './core/store/app.reducers'
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 import { environment } from '../environments/environment'
 export function logger(reducer: ActionReducer<AppState>): any {
@@ -43,6 +44,7 @@ export const metaReducers = environment.production ? [] : [logger]
     FontAwesomeModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
     ToastrModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
     ServicesModule,
     AuthenticationModule,
     SharedModule,

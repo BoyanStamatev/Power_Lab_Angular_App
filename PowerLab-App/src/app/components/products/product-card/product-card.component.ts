@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductModel } from '../ProductModul';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,7 +11,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() public product: ProductModel
 
-  constructor() { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit() {
   }

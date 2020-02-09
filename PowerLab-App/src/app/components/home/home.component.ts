@@ -4,6 +4,9 @@ import { ProductModel } from '../products/ProductModul';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 import { AppState } from 'src/app/core/store/app.state';
 import { Store, select } from '@ngrx/store';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterModalComponent } from '../authentication/register-modal/register-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +18,10 @@ export class HomeComponent implements OnInit {
  public products$: Observable<ProductModel[]>
 
   constructor(
+    public authService: AuthenticationService,
     private productsService: ProductsService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -24,6 +29,16 @@ export class HomeComponent implements OnInit {
     this.products$ = this.store.pipe(select(state => state.products.all
       .sort((a,b) => b.likes.length - a.likes.length)
       .slice(0, 3) ))
+  }
+
+  openRegisterModal() {
+    const registerRef = this.modalService.open(RegisterModalComponent)
+    registerRef.result.then((res) => {
+
+    }).catch((err) => {
+      
+    })
+
   }
 
 }
