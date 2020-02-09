@@ -1,9 +1,10 @@
-import { MenuComponent } from './menu/menu.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 export const productsComponent = [
-    MenuComponent,
     ProductListComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductDetailsComponent,
+
 ]
