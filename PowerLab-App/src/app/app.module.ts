@@ -16,13 +16,12 @@ import { MenuComponent } from './components/menu/menu.component'
 import { ProductsModule } from './components/products/products.module'
 import { JWTInterceptor, ErrorInterceptor } from './core/interceptors'
 import { ToastrModule } from 'ngx-toastr'
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { GuardsModule } from './core/guards/guards.module'
 import { StoreModule, ActionReducer } from '@ngrx/store'
 import { AppState } from './core/store/app.state'
 import { storeLogger } from 'ngrx-store-logger'
 import { appReducers } from './core/store/app.reducers'
-import { MDBBootstrapModule } from 'angular-bootstrap-md'
-
 import { environment } from '../environments/environment'
 export function logger(reducer: ActionReducer<AppState>): any {
   return storeLogger()(reducer)

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { ProductModel } from 'src/app/components/products/ProductModul'
+import { ProductModel } from 'src/app/components/products/models/ProductModel'
 
 export const GET_ALL = '[PRODUCTS] GET_ALL'
 

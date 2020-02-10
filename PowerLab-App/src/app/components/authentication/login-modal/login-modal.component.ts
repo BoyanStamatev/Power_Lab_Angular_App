@@ -12,12 +12,12 @@ import { LoginModel } from '../models/LoginModel';
 })
 export class LoginModalComponent implements OnInit {
 
-  public loginForm
-  public faWindowClose = faWindowClose
+  protected loginForm
+  protected faWindowClose = faWindowClose
   
   constructor(
-    public formBuilder: FormBuilder, 
-    public activeModal: NgbActiveModal,
+    protected formBuilder: FormBuilder, 
+    protected activeModal: NgbActiveModal,
     private authService: AuthenticationService
     ) { }
 
@@ -33,11 +33,15 @@ export class LoginModalComponent implements OnInit {
   get password() { return this.loginForm.get('password') }
 
   public submitForm() {
+
+    if(this.loginForm.invalid) {return}
+
     this.authService.login(this.loginForm.value).subscribe(() => {
       const formValue = this.loginForm.value
       const loginModel: LoginModel = {email: formValue.email, password: formValue.password}
       this.authService.login(loginModel).subscribe(() => this.activeModal.close())
     })
+    
   }
 }
 

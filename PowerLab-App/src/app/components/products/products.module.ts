@@ -6,15 +6,18 @@ import { NgxPaginationModule } from 'ngx-pagination'
 import { productsComponent } from '.';
 import { ProductsRoutingModule } from './products.routing';
 import { DetailsPageComponent } from './details-page/details-page.component';
+import { ProductReviewsComponent } from './product-reviews/product-reviews.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     ...productsComponent,
-    DetailsPageComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxPaginationModule,
     ProductsRoutingModule
   ],

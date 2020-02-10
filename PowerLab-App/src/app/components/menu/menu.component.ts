@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductModel } from '../products/ProductModul';
+import { ProductModel } from '../products/models/ProductModel';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 import { AppState } from 'src/app/core/store/app.state';
 import { Store, select } from '@ngrx/store';
@@ -17,7 +17,6 @@ public products$: Observable<ProductModel[]>
   constructor(
     private productsService: ProductsService,
     private store: Store<AppState>
-
   ) { }
 
   ngOnInit() {

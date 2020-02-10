@@ -1,6 +1,6 @@
 import { ProductsState } from "./products.state";
 import { GET_ALL } from './products.action';
-import { ProductModel } from 'src/app/components/products/ProductModul';
+import { ProductModel } from 'src/app/components/products/models/ProductModel';
 
 
 const initialState: ProductsState = {

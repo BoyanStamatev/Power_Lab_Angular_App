@@ -13,12 +13,12 @@ import { RegisterModel } from '../models/RegisterModel';
 })
 export class RegisterModalComponent implements OnInit {
 
-  public registerForm
-  public faWindowClose = faWindowClose
+  protected registerForm
+  protected faWindowClose = faWindowClose
   
   constructor(
-    public formBuilder: FormBuilder, 
-    public activeModal: NgbActiveModal,
+    protected formBuilder: FormBuilder, 
+    protected activeModal: NgbActiveModal,
     private authService: AuthenticationService,
     private toastrService: ToastrService
     ) { }
@@ -39,6 +39,9 @@ export class RegisterModalComponent implements OnInit {
   get confirmPassword() { return this.registerForm.get('confirmPassword') }
 
   public submitForm() {
+
+    if(this.registerForm.invalid) {return}
+
     const formValue = this.registerForm.value
     const registerModel: RegisterModel = {username: formValue.username, email:formValue.email, password:formValue.password} 
     this.authService.register(registerModel).subscribe(() => {

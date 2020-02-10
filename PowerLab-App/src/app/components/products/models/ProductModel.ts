@@ -1,3 +1,5 @@
+import { ReviewModel } from './ReviewModel';
+
 export interface ProductModel {
  _id: string
  name: string
@@ -7,5 +9,5 @@ export interface ProductModel {
  weight: number
  ingredients: Array<String>
  likes: Array<String>
- reviews: Array<Object>
+ reviews: ReviewModel[]
 }
