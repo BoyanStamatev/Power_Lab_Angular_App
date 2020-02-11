@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { ProductListComponent } from './components/products/product-list/product-list.component';
-import { ProductCardComponent } from './components/products/product-card/product-card.component';
 import { ProductsModule } from './components/products/products.module';
 
 

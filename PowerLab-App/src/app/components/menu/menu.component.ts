@@ -12,7 +12,7 @@ import { Store, select } from '@ngrx/store';
 })
 export class MenuComponent implements OnInit {
 
-public products$: Observable<ProductModel[]>
+protected products$: Observable<ProductModel[]>
 
   constructor(
     private productsService: ProductsService,

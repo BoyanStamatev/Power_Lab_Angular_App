@@ -9,10 +9,10 @@ import { ProductsModule } from '../products.module';
 })
 export class ProductListComponent implements OnInit {
 
-  @Input() public products$: Observable<ProductsModule[]>
+  @Input() protected products$: Observable<ProductsModule[]>
 
-  public pageSize: number = 6
-  public currentPage: number = 1
+  protected pageSize: number = 6
+  protected currentPage: number = 1
 
   constructor() { }
 

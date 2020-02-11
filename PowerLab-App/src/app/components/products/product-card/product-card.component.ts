@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input() public product: ProductModel
+  @Input() protected product: ProductModel
 
   constructor(
-    public authService: AuthenticationService,
+    protected authService: AuthenticationService,
     private router: Router
     ) { }
 

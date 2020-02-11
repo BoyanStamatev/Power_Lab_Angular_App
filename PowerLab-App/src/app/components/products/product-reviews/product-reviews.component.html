@@ -18,7 +18,6 @@
         </div>
       </form>
     </div>
-    <div *ngIf="reviews$ | async as reviews">
       <div class="col-md-8 review" *ngFor="let r of reviews">
         <div class="card text-black bg-light">
           <div class="card-body">
@@ -31,5 +30,4 @@
           </div>
         </div>
       </div>
-    </div>
   </div>

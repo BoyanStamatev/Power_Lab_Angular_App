@@ -13,9 +13,9 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 })
 export class NavigationComponent implements OnInit {
 
-  public faLogin = faSignInAlt
-  public faLogout = faSignOutAlt
-  public faRegister = faUserPlus
+  protected faLogin = faSignInAlt
+  protected faLogout = faSignOutAlt
+  protected faRegister = faUserPlus
   
   constructor(
     private modalService: NgbModal, 

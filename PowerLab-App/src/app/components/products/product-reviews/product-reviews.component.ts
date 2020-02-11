@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { ReviewModel } from '../models/ReviewModel';
+import { ProductsService } from 'src/app/core/services/products/products.service';
 
 @Component({
   selector: 'app-product-reviews',
@@ -14,13 +15,14 @@ import { ReviewModel } from '../models/ReviewModel';
 export class ProductReviewsComponent implements OnInit {
 
   protected reviewForm
-  protected reviews$: Observable<ReviewModel[]>
+  @Input() protected reviews: ReviewModel[]
   @Input() private id: string
 
   constructor(
     protected formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private productsService: ProductsService
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,6 @@ export class ProductReviewsComponent implements OnInit {
       review: ['', [Validators.required, Validators.minLength(4)]]
     })
 
-    this.reviews$ = this.store.pipe(select(state => state.products.all.find(p => p._id === this.id).reviews))
   }
 
   get review() { return this.reviewForm.get('review') }
@@ -38,7 +39,8 @@ export class ProductReviewsComponent implements OnInit {
 
     const formValue = this.reviewForm.value
     const reviewModel = new ReviewModel(formValue.review, this.authService.getUsername())
-    // dispatch action
+    this.productsService.addProductReview(reviewModel,this.id)
+    this.reviewForm.reset()
   }
 
 }
