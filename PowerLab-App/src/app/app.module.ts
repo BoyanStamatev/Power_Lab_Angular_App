@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module'
 import { RouterModule } from '@angular/router'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component'
 import { ServicesModule } from './core/services/services.module'
@@ -24,6 +23,7 @@ import { storeLogger } from 'ngrx-store-logger'
 import { appReducers } from './core/store/app.reducers'
 import { environment } from '../environments/environment';
 import { CartComponent } from './components/cart/cart.component'
+import { OrdersModule } from './components/orders/orders.module'
 export function logger(reducer: ActionReducer<AppState>): any {
   return storeLogger()(reducer)
 }
@@ -52,8 +52,9 @@ export const metaReducers = environment.production ? [] : [logger]
     AuthenticationModule,
     SharedModule,
     ProductsModule,
+    OrdersModule,
     GuardsModule,
-    
+
   ],
   providers: [
     {
