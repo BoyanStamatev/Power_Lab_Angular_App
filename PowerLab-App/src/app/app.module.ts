@@ -22,7 +22,8 @@ import { StoreModule, ActionReducer } from '@ngrx/store'
 import { AppState } from './core/store/app.state'
 import { storeLogger } from 'ngrx-store-logger'
 import { appReducers } from './core/store/app.reducers'
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { CartComponent } from './components/cart/cart.component'
 export function logger(reducer: ActionReducer<AppState>): any {
   return storeLogger()(reducer)
 }
@@ -33,7 +34,8 @@ export const metaReducers = environment.production ? [] : [logger]
   declarations: [
     AppComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    CartComponent
   ],
   imports: [
     NgbModule,
