@@ -5,9 +5,8 @@ import { NgxPaginationModule } from 'ngx-pagination'
 
 import { productsComponent } from '.';
 import { ProductsRoutingModule } from './products.routing';
-import { DetailsPageComponent } from './details-page/details-page.component';
-import { ProductReviewsComponent } from './product-reviews/product-reviews.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    SharedModule
   ],
   exports: [
     ...productsComponent

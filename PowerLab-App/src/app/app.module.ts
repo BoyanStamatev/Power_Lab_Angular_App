@@ -50,8 +50,8 @@ export const metaReducers = environment.production ? [] : [logger]
     AuthenticationModule,
     SharedModule,
     ProductsModule,
-    GuardsModule
-
+    GuardsModule,
+    
   ],
   providers: [
     {

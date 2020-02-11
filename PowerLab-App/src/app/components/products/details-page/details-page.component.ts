@@ -17,18 +17,17 @@ export class DetailsPageComponent extends BaseComponent implements OnInit {
   protected id: string
   protected product: ProductModel
   private subscription$: Subscription
+  protected notFoundMessage = 'PRODUCT NOT FOUND'
   
   constructor (
     private route: ActivatedRoute,
     private store: Store<AppState>,
-    private productsService: ProductsService
     ) {
       super()
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')
-    this.productsService.getAllProduts()
     
     this.subscription$ = this.store
     .pipe(select(state => state.products.all))

@@ -8,7 +8,6 @@ img {
   height: 120px;
 }
 
-  .bottom {
-    position: absolute;
-    bottom: 0px;
-  } 
+.custom-button:focus {
+  box-shadow: none !important;
+}

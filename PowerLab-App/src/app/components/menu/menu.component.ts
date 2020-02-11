@@ -20,7 +20,7 @@ protected products$: Observable<ProductModel[]>
   ) { }
 
   ngOnInit() {
-    this.productsService.getAllProduts()
+    this.productsService.getAllProducts()
     this.products$ = this.store.pipe(select(state => state.products.all))
   }
 

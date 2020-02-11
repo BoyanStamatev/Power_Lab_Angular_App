@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productsService.getAllProduts()
+    this.productsService.getAllProducts()
     this.products$ = this.store.pipe(select(state => state.products.all
       .sort((a,b) => b.likes.length - a.likes.length)
       .slice(0, 3) ))

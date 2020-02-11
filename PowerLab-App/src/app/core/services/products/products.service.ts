@@ -20,7 +20,7 @@ export class ProductsService {
     private toastr: ToastrService
   ) { }
 
-  getAllProduts() {
+  getAllProducts() {
     this.http.get<ProductModel[]>(baseUrl + 'all').subscribe(products => {
       this.store.dispatch(new GetAllProducts(products))
     })

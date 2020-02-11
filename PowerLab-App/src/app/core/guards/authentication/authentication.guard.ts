@@ -8,6 +8,8 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from 'src/app/components/authentication/login-modal/login-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class AuthenticationGuard implements CanActivate {
   
 constructor(
   private authService: AuthenticationService,
-  private router: Router
+  private router: Router,
+  private modalService: NgbModal
   ) {}
 
   canActivate(
@@ -28,7 +31,17 @@ constructor(
     }
 
     this.router.navigate(['/'])
+    this.openLoginModal()
     return false
+  }
+
+  openLoginModal() {
+    const loginRef = this.modalService.open(LoginModalComponent)
+    loginRef.result.then(res => {
+      console.log(res);
+    }).catch (err => {
+      console.log(err);
+    })
   }
   
 }

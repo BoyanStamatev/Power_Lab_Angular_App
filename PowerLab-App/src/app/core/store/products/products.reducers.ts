@@ -27,6 +27,10 @@ function dataReassign(oldData, newData) {
         }
     }
 
+    for (const entryId in newDataById) {
+        result.push(newDataById[entryId])
+      }
+
     return result
 }
 
