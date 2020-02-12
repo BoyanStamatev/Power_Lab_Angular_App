@@ -8,7 +8,7 @@ import { OrdersRoutingModule } from './orders.routing';
 
 @NgModule({
   declarations: [
-    ...ordersComponents
+    ...ordersComponents,
   ],
   imports: [
     CommonModule,

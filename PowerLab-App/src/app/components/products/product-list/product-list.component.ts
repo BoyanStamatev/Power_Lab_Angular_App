@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsModule } from '../products.module';
-import { ProductModel } from '../models/ProductModel';
+import { ProductModel } from '../../../core/store/products/models/ProductModel';
 
 @Component({
   selector: 'app-product-list',

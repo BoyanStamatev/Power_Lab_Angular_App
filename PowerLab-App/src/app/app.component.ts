@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from './core/store/app.state';
 import { NgxSpinnerService } from 'ngx-spinner'
+import { AuthenticationService } from './core/services/authentication/authentication.service';
+import { OrdersService } from './core/services/orders/orders.service';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +21,19 @@ export class AppComponent extends BaseComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private store: Store<AppState>,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private authService: AuthenticationService,
+    private ordersService: OrdersService,
   ) {
     super()
   }
 
   ngOnInit() {
     this.productsService.getAllProducts()
+
+    if (this.authService.isAuthenticated()) {
+      this.ordersService.getUserOrders()
+    }
 
     this.subscription$ = this.store
     .pipe(select(state => state.http.currentGetCalls))

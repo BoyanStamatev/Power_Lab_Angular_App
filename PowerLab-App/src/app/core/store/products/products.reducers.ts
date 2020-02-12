@@ -1,7 +1,7 @@
 import { ProductsState } from "./products.state";
 import { GET_ALL, ADD_REVIEW, LIKE_PRODUCT, UNLIKE_PRODUCT } from './products.action';
-import { ProductModel } from 'src/app/components/products/models/ProductModel';
-import { ReviewModel } from 'src/app/components/products/models/ReviewModel';
+import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
+import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
 
 
 const initialState: ProductsState = {
@@ -43,7 +43,7 @@ function likeProduct(state: ProductsState, id: string, username: string) {
     return Object.assign({}, state, { all: allProductsCopy })
   }
 
-export function ProductsReducer(state: ProductsState = initialState, action) {
+export function productsReducer(state: ProductsState = initialState, action) {
 
     switch (action.type) {
         case GET_ALL:

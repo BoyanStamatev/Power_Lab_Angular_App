@@ -8,7 +8,7 @@ const initialState: AuthenticationState = {
   isAuthenticated: false
 }
 
-export function AuthenticationReducer (state: AuthenticationState = initialState, action) {
+export function authenticationReducer (state: AuthenticationState = initialState, action) {
 
     switch(action.type) {
         case AUTHENTICATE:

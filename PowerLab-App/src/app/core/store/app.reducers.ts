@@ -1,12 +1,14 @@
-import { AuthenticationReducer } from './authentication/authentication.reducers';
-import { ProductsReducer } from './products/products.reducers';
+import { authenticationReducer } from './authentication/authentication.reducers';
+import { productsReducer } from './products/products.reducers';
 import { cartReducer } from './cart/cart.reducers';
 import { httpReducer } from './http/http.reducers';
+import { ordersReducers } from './orders/orders.reducers';
 
 
 export const appReducers = {
-    authentication: AuthenticationReducer,
-    products: ProductsReducer,
+    authentication: authenticationReducer,
+    products: productsReducer,
     cart: cartReducer,
-    http: httpReducer
+    http: httpReducer,
+    orders: ordersReducers
 }

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
-import { ProductModel } from 'src/app/components/products/models/ProductModel';
+import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
 import { GetAllProducts, AddProductReview, LikeProduct, UnlikeProduct } from '../../store/products/products.action';
-import { ReviewModel } from 'src/app/components/products/models/ReviewModel';
+import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 

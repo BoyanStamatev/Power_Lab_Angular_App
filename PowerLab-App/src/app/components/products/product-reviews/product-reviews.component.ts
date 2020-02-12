@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { ReviewModel } from '../models/ReviewModel';
+import { ReviewModel } from '../../../core/store/products/models/ReviewModel';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 
 @Component({

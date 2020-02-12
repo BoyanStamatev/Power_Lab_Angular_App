@@ -20,18 +20,15 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             switch (err.status) {
                 case 400:
-                    const message = Object.keys(err.error.errors)
-                        .map(e => err.error.errors[e])
-                        .join('\n')
-                    this.toastr.error(message, 'Warnng!')
-                    break;
                 case 401:
-                    this.spinner.hide()
+                    if (req.url.endsWith('/auth/signup') || req.url.endsWith('/auth/login')) {
+                        this.spinner.hide()
+                      }
                     if (err.error.errors) {
-                      const errMessage = Object.keys(err.error.errors)
+                      const message = Object.keys(err.error.errors)
                         .map(e => err.error.errors[e])
                         .join('\n')
-                      this.toastr.error(errMessage, 'Warning!')
+                      this.toastr.error(message, 'Warning!')
                     } else {
                       this.toastr.error(err.error.message, 'Warning!')
                     }

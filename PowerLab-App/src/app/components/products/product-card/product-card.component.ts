@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductModel } from '../models/ProductModel';
+import { ProductModel } from '../../../core/store/products/models/ProductModel';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
