@@ -5,6 +5,8 @@ import { AppState } from 'src/app/core/store/app.state';
 import { Router } from '@angular/router';
 import { CartProductModel } from 'src/app/core/models/CartProductModel';
 import { AddToCart } from 'src/app/core/store/cart/cart.actions';
+import { ProductsService } from 'src/app/core/services/products/products.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +19,9 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private productsService: ProductsService,
+    protected authService: AuthenticationService,
   ) { }
 
   ngOnInit() { }
@@ -31,6 +35,14 @@ export class ProductDetailsComponent implements OnInit {
 
     this.store.dispatch(new AddToCart(productToAdd))
     this.router.navigate(['/cart'])
+  }
+
+  onLikeButtonClick() {
+    this.productsService.likeProduct(this.product._id, this.authService.getUsername())
+  }
+
+  onUnlikeButtonClick() {
+    this.productsService.unlikeProduct(this.product._id, this.authService.getUsername())
   }
 
 }

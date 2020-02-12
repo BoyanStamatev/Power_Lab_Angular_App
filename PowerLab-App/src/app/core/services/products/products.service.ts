@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ProductModel } from 'src/app/components/products/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
-import { GetAllProducts, AddProductReview } from '../../store/products/products.action';
+import { GetAllProducts, AddProductReview, LikeProduct, UnlikeProduct } from '../../store/products/products.action';
 import { ReviewModel } from 'src/app/components/products/models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
@@ -20,8 +20,7 @@ export class ProductsService {
 
   constructor(
     private http: HttpClient,
-    private store: Store<AppState>,
-    private toastr: ToastrService
+    private store: Store<AppState>
   ) { }
 
   getAllProducts() {
@@ -42,9 +41,17 @@ export class ProductsService {
   }
 
   addProductReview(model: ReviewModel, id: string) {
-    this.http.post(baseUrl+'review/'+id, model).subscribe((res: ResponseDataModel) => {
-      this.store.dispatch(new AddProductReview(res.data))
-      this.toastr.success(res.message)
-    })
+      this.store.dispatch(new AddProductReview(model, id))
+      this.http.post(baseUrl+'review/'+id, model).subscribe()
+  }
+  
+  likeProduct(id: string, username: string) {
+      this.store.dispatch(new LikeProduct(id, username))
+      this.http.post(`${baseUrl}like/${id}`, {}).subscribe()
+  }
+
+  unlikeProduct(id: string, username: string) {
+      this.store.dispatch(new UnlikeProduct(id, username))
+      this.http.post(`${baseUrl}unlike/${id}`, {}).subscribe()
   }
 }

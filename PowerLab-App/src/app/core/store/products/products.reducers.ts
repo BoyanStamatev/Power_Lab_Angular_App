@@ -1,6 +1,7 @@
 import { ProductsState } from "./products.state";
-import { GET_ALL, ADD_REVIEW } from './products.action';
+import { GET_ALL, ADD_REVIEW, LIKE_PRODUCT, UNLIKE_PRODUCT } from './products.action';
 import { ProductModel } from 'src/app/components/products/models/ProductModel';
+import { ReviewModel } from 'src/app/components/products/models/ReviewModel';
 
 
 const initialState: ProductsState = {
@@ -8,31 +9,39 @@ const initialState: ProductsState = {
 }
 
 function getAllProducts(state: ProductsState, products: ProductModel[]) {
-    return Object.assign({}, state, { all: dataReassign(state.all, products) })
+    return Object.assign({}, state, { all: products })
 }
 
-function dataReassign(oldData, newData) {
-    let newDataById = {}
-    for(let entry of newData) {
-        newDataById[entry._id] = entry
+function addProductReview(state: ProductsState, review: ReviewModel, productId: string) {
+    const allProductsCopy = state.all.slice()
+    const product = allProductsCopy.find(p => p._id === productId)
+    if (product) {
+      product.reviews.push(review)
     }
 
-    let result = []
-    for(let entry of oldData) {
-        if (newDataById[entry._id]) {
-            result.push(newDataById[entry._id])
-            delete newDataById[entry._id]
-        } else {
-            result.push(entry)
-        }
-    }
-
-    for (const entryId in newDataById) {
-        result.push(newDataById[entryId])
-      }
-
-    return result
+    return Object.assign({}, state, { all: allProductsCopy })
 }
+
+function likeProduct(state: ProductsState, id: string, username: string) {
+    const allProductsCopy = state.all.slice()
+    const product = allProductsCopy.find(p => p._id === id)
+    if (product) {
+      product.likes.push(username)
+    }
+  
+    return Object.assign({}, state, { all: allProductsCopy })
+  }
+
+
+  function unlikeProduct(state: ProductsState, id: string, username: string) {
+    const allProductsCopy = state.all.slice()
+    const product = allProductsCopy.find(p => p._id === id)
+    if (product) {
+      product.likes = product.likes.filter(u => u !== username)
+    }
+  
+    return Object.assign({}, state, { all: allProductsCopy })
+  }
 
 export function ProductsReducer(state: ProductsState = initialState, action) {
 
@@ -40,7 +49,11 @@ export function ProductsReducer(state: ProductsState = initialState, action) {
         case GET_ALL:
             return getAllProducts(state, action.payload)
         case ADD_REVIEW:
-            return getAllProducts(state, [action.payload])
+            return addProductReview(state, action.review, action.productId)
+        case LIKE_PRODUCT:
+            return likeProduct(state, action.id, action.username)
+        case UNLIKE_PRODUCT:
+            return unlikeProduct(state, action.id, action.username)
         default:
             return state
     }
