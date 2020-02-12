@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RegisterModel } from '../models/RegisterModel';
 import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register-modal',
@@ -23,7 +24,7 @@ export class RegisterModalComponent extends BaseComponent implements OnInit {
     protected formBuilder: FormBuilder, 
     protected activeModal: NgbActiveModal,
     private authService: AuthenticationService,
-    private toastrService: ToastrService
+    private spinner: NgxSpinnerService
     ) { 
       super()
     }
@@ -47,9 +48,11 @@ export class RegisterModalComponent extends BaseComponent implements OnInit {
 
     if(this.registerForm.invalid) {return}
 
+    this.spinner.show()
     const formValue = this.registerForm.value
     const registerModel: RegisterModel = {username: formValue.username, email:formValue.email, password:formValue.password} 
     this.subscription$ = this.authService.register(registerModel).subscribe(() => {
+      this.spinner.hide()
       this.activeModal.close()
     })
     
