@@ -2,35 +2,37 @@
     <table id="cart" class="table table-hover table-condensed">
       <thead>
         <tr>
-          <th style="width: 50px;">Product</th>
-          <th style="width: 10px;">Price</th>
-          <th style="width: 8px;">Quantity</th>
-          <th style="width: 22px;" class="text-center">Subtotal</th>
-          <th style="width: 10px;"></th>
+          <th >Product</th>
+          <th >Price</th>
+          <th >Quantity</th>
+          <th  class="text-center">Subtotal</th>
+          <th ></th>
         </tr>
       </thead>
-      <tbody>
         <tr *ngFor="let pr of products">
          <td data-th="Product">
             <div class="row">
-              <div class="col-sm-4 hidden-xs"><img src="" alt="Image" class="cart-image" /></div>
+            <div class="col-sm-4 hidden-xs"><img src="{{pr.image}}" alt="Image" class="cart-image" /></div>
               <div class="col-sm-8">
-                <h4 class="nomargin">Title</h4>
-                <p>description</p>
+                <h4 class="nomargin">{{pr.name}}</h4>
+                <p>{{pr.ingredients.join(', ')}}</p>
               </div>
             </div>
           </td>
-          <td data-th="Price">price</td>
+          <td data-th="Price">{{pr.price.toFixed(2)}</td>
           <td data-th="Quantity">
             <input
               type="number"
               name="quantity"
-              class="form-control text-center" />
+              class="form-control text-center" 
+              (change)="onQuantChange($event, pr._id)"
+              value="{{pr.quantity}}"
+              />
           </td>
           <td data-th="Subtotal" class="text-center">price</td>
           <td class="actions" data-th="">
-            <button class="btn btn-info btn-sm" onClick={this.onRefreshButtonClick}><i class="fa fa-refresh"></i></button>
-            <button class="btn btn-danger btn-sm" onClick={this.onDeleteButtonClick}><i class="fa fa-trash-o"></i></button>
+            <button class="btn btn-info btn-sm" onClick={onRefreshButtonClick(pr._id)}><i class="fa fa-refresh"></i></button>
+            <button class="btn btn-danger btn-sm" onClick={onDeleteButtonClick(pr._id)}><i class="fa fa-trash-o"></i></button>
           </td>
         </tr>
       </tbody>
@@ -38,8 +40,8 @@
         <tr>
           <td><a routerLink="/menu" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
           <td colSpan="2" class="hidden-xs"></td>
-          <td class="hidden-xs text-center"><strong>Total 0.00</strong></td>
-          <td><button class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></button></td>
+          <td class="hidden-xs text-center"><strong>Total {{totalSum.toFixed(2)}}</strong></td>
+          <td *ngIf="products.length > 0"><button class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></button></td *ngIf="products.length > 0">
         </tr>
       </tfoot>
     </table>

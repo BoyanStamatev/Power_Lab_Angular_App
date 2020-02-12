@@ -1,5 +1,5 @@
-import { ADD_TO_CART } from './cart.actions'
-import { CartProductModel } from "src/app/components/cart/models/CartProductModel";
+import { ADD_TO_CART, SYNC_CART, REMOVE_FROM_CART } from './cart.actions'
+import { CartProductModel } from "src/app/core/models/CartProductModel";
 import { CartState } from './cart.state';
 
 const initialState: CartState = {
@@ -20,10 +20,30 @@ function addToCart(state: CartState, product: CartProductModel) {
     })
 }
 
+function syncCart (state: CartState, id: string, quantity: number) {
+    const newProducts = state.products.slice()
+    const cartProduct = newProducts.find(p => p.productId === id)
+    cartProduct.quantity = quantity
+  
+    return Object.assign({}, state, {
+      products: newProducts
+    })
+  }
+  
+  function removeFromCart (state: CartState, id: string) {
+    return Object.assign({}, state, {
+      products: state.products.filter(p => p.productId !== id)
+    })
+  }
+
 export function cartReducer(state: CartState = initialState, action) {
     switch (action.type) {
         case ADD_TO_CART:
             return addToCart(state, action.payload)
+        case SYNC_CART:
+            return syncCart(state, action.id, action.quantity)
+        case REMOVE_FROM_CART:
+            return removeFromCart(state, action.id)
         default:
             return state
     }
