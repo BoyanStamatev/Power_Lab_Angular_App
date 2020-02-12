@@ -7,12 +7,16 @@ import { ToastrService } from 'ngx-toastr';
 import { GetAllProducts, AddProductReview } from '../../store/products/products.action';
 import { ReviewModel } from 'src/app/components/products/models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
+import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 
 
 const baseUrl = 'http://localhost:5000/power/'
+const minutes = 1000 * 60 * 5
 
 @Injectable()
 export class ProductsService {
+  private productsCached: boolean = false
+  private cacheTime: number
 
   constructor(
     private http: HttpClient,
@@ -21,8 +25,19 @@ export class ProductsService {
   ) { }
 
   getAllProducts() {
+    if (this.productsCached && (new Date().getTime() - this.cacheTime) < minutes) {
+      return
+    }
+    this.productsCached = false
+    this.cacheTime = null
+
+    this.store.dispatch(new GetRequestBegin())
+
     this.http.get<ProductModel[]>(baseUrl + 'all').subscribe(products => {
+      this.productsCached = true
+      this.cacheTime = new Date().getTime()
       this.store.dispatch(new GetAllProducts(products))
+      this.store.dispatch(new GetRequestEnd())
     })
   }
 

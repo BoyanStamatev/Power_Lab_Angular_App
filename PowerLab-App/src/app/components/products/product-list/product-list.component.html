@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="row">
     <div *ngIf='products$ | async as products'>
       <div *ngIf="products.length > 0; else notFound" class="row space-top">
@@ -6,7 +7,8 @@
           id: 'allProducts',
           itemsPerPage: pageSize,
           currentPage: currentPage
-        }" class="card col-lg-4 col-sm-6">
+          }; trackBy: trackByIds" 
+          class="card col-lg-4 col-sm-6">
           <app-product-card [product]='product'></app-product-card>
         </div>
       </div>
@@ -18,18 +20,18 @@
     </div>
   </div>
 
-  <pagination-controls
-    class="paginator"
-    id="allProducts"
-    (pageChange)="changePage($event)"
+  <pagination-controls 
+    class="paginator" 
+    id="allProducts" 
+    (pageChange)="changePage($event)" 
     maxSize="9"
-    directionLinks="true"
-    autoHide="true"
-    previousLabel="Previous"
+    directionLinks="true" 
+    autoHide="true" 
+    previousLabel="Previous" 
     nextLabel="Next"
-    screenReaderPaginationLabel="Pagination"
-    screenReaderPageLabel="page"
+    screenReaderPaginationLabel="Pagination" 
+    screenReaderPageLabel="page" 
     screenReaderCurrentLabel="You're on page">
   </pagination-controls>
-  
+
 </div>

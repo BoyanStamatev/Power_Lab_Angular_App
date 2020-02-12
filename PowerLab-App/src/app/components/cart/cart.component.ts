@@ -3,21 +3,26 @@ import { AppState } from 'src/app/core/store/app.state';
 import { Store, select } from '@ngrx/store';
 import { ProductInCartModel } from 'src/app/core/models/ProductInCartModel';
 import { SyncCart, RemoveFromCart } from 'src/app/core/store/cart/cart.actions';
+import { BaseComponent } from '../base.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent extends BaseComponent implements OnInit {
 
   protected products: ProductInCartModel[]
   protected totalSum: number
+  private subscription$: Subscription
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {
+    super()
+   }
 
   ngOnInit() {
-    this.store.pipe(select(state => state))
+    this.subscription$ = this.store.pipe(select(state => state))
       .subscribe(state => {
         const products = state.products.all
         const cartProductsIds = state.cart.products.map(p => p.productId)
@@ -43,6 +48,8 @@ export class CartComponent implements OnInit {
         this.products = allProducts
         this.totalSum = total
       })
+
+      this.subscriptions.push(this.subscription$)
   }
 
   onQuantChange(event, id) {
