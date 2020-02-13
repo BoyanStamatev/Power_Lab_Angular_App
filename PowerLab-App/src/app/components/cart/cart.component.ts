@@ -5,6 +5,8 @@ import { ProductInCartModel } from 'src/app/core/models/ProductInCartModel';
 import { SyncCart, RemoveFromCart } from 'src/app/core/store/cart/cart.actions';
 import { BaseComponent } from '../base.component';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { OrdersService } from 'src/app/core/services/orders/orders.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +19,11 @@ export class CartComponent extends BaseComponent implements OnInit {
   protected totalSum: number
   private subscription$: Subscription
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private ordersService: OrdersService
+    ) {
     super()
    }
 
@@ -65,6 +71,21 @@ export class CartComponent extends BaseComponent implements OnInit {
 
   onDeleteButtonClick(id) {
     this.store.dispatch(new RemoveFromCart(id))
+  }
+
+  onCheckoutButtonClick() {
+    const products = []
+    for (const pr of this.products) {
+      products.push({
+        id: pr._id,
+        name: pr.name,
+        quantity: pr.quantity,
+        price: pr.price
+      })
+    }
+
+    this.ordersService.submitNewOrder(products)
+    this.router.navigate(['/orders/my'])
   }
 
 }
