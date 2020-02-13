@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ordersComponents } from '.';
 import { SharedModule } from '../shared/shared.module';
 import { OrdersRoutingModule } from './orders.routing';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -13,11 +14,11 @@ import { OrdersRoutingModule } from './orders.routing';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   exports: [
     ...ordersComponents
-
   ]
 })
 export class OrdersModule { }

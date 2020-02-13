@@ -85,7 +85,6 @@ export class CartComponent extends BaseComponent implements OnInit {
     }
 
     this.ordersService.submitNewOrder(products)
-    this.router.navigate(['/orders/my'])
   }
 
 }

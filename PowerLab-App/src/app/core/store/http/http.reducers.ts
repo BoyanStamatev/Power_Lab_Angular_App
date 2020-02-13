@@ -1,8 +1,11 @@
 import { GET_REQUEST_BEGIN, GET_REQUEST_END } from './http.actions'
 import { HttpState } from './http.state'
+import { GET_USER_ORDERS } from '../orders/order.actions'
+import { DEAUTHENTICATE } from '../authentication/authentication.actions'
 
 const initialState = {
-  currentGetCalls: 0
+  currentGetCalls: 0,
+  ordersRequestMade: false
 }
 
 export function httpReducer(state: HttpState = initialState, action) {
@@ -14,6 +17,14 @@ export function httpReducer(state: HttpState = initialState, action) {
     case GET_REQUEST_END:
       return Object.assign({}, state, {
         currentGetCalls: state.currentGetCalls - 1
+      })
+      case GET_USER_ORDERS:
+        return Object.assign({}, state, {
+          ordersRequestMade: true
+        })
+      case DEAUTHENTICATE:
+      return Object.assign({}, state, {
+        ordersRequestMade: false
       })
     default:
       return state

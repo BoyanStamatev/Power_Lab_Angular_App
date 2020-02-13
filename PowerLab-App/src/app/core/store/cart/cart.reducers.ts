@@ -1,6 +1,7 @@
-import { ADD_TO_CART, SYNC_CART, REMOVE_FROM_CART } from './cart.actions'
+import { ADD_TO_CART, SYNC_CART, REMOVE_FROM_CART, CLEAR_CART } from './cart.actions'
 import { CartProductModel } from "src/app/core/models/CartProductModel";
 import { CartState } from './cart.state';
+import { DEAUTHENTICATE } from '../authentication/authentication.actions';
 
 const initialState: CartState = {
     products: []
@@ -20,21 +21,25 @@ function addToCart(state: CartState, product: CartProductModel) {
     })
 }
 
-function syncCart (state: CartState, id: string, quantity: number) {
+function syncCart(state: CartState, id: string, quantity: number) {
     const newProducts = state.products.slice()
     const cartProduct = newProducts.find(p => p.productId === id)
     cartProduct.quantity = quantity
-  
+
     return Object.assign({}, state, {
-      products: newProducts
+        products: newProducts
     })
-  }
-  
-  function removeFromCart (state: CartState, id: string) {
+}
+
+function removeFromCart(state: CartState, id: string) {
     return Object.assign({}, state, {
-      products: state.products.filter(p => p.productId !== id)
+        products: state.products.filter(p => p.productId !== id)
     })
-  }
+}
+
+function clearCart(state: CartState) {
+    return Object.assign({}, state, { products: [] })
+}
 
 export function cartReducer(state: CartState = initialState, action) {
     switch (action.type) {
@@ -44,6 +49,9 @@ export function cartReducer(state: CartState = initialState, action) {
             return syncCart(state, action.id, action.quantity)
         case REMOVE_FROM_CART:
             return removeFromCart(state, action.id)
+        case CLEAR_CART:
+        case DEAUTHENTICATE:
+            return clearCart(state)
         default:
             return state
     }

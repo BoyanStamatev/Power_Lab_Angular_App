@@ -15,8 +15,8 @@ const minutes = 1000 * 60 * 5
 
 @Injectable()
 export class ProductsService {
-  private productsCached: boolean = false
-  private cacheTime: number
+  private productsCached: boolean = true
+  private cacheTime = new Date().getTime()
 
   constructor(
     private http: HttpClient,
