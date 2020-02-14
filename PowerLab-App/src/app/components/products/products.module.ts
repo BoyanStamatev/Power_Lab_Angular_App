@@ -7,6 +7,8 @@ import { productsComponent } from '.';
 import { ProductsRoutingModule } from './products.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ProductDeleteModalComponent } from './product-delete-modal/product-delete-modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     RouterModule,
+    FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
@@ -23,6 +26,9 @@ import { SharedModule } from '../shared/shared.module';
   ],
   exports: [
     ...productsComponent
+  ],
+  entryComponents: [
+    ProductDeleteModalComponent
   ]
 })
 export class ProductsModule { }
