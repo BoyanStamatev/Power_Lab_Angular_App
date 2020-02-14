@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="weight">Weight</label>
-                    <input type="text" class="form-control" id="weight" formControlName="weight"
+                    <input type="number" class="form-control" id="weight" formControlName="weight"
                         [ngClass]="{ 'is-invalid': weight.touched && weight.errors }" />
                     <div *ngIf="weight.errors" class="invalid-feedback">
                         <div *ngIf="weight.errors.required">
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="price">Price</label>
-                    <input type="text" class="form-control" id="price" formControlName="price"
+                    <input type="number" class="form-control" id="price" formControlName="price"
                         [ngClass]="{ 'is-invalid': price.touched && price.errors }" />
                     <div *ngIf="price.errors" class="invalid-feedback">
                         <div *ngIf="price.errors.required">

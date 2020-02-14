@@ -40,7 +40,6 @@ public createForm
     const product: CreateProductModel = Object.assign({}, this.createForm.value)
 
     this.productsService.createProduct(product)
-    this.createForm.clear()
   }
 
   get name () {

@@ -10,6 +10,7 @@ import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateProductModel } from '../../store/products/models/CreateProductsModel';
+import { Router } from '@angular/router';
 
 
 const baseUrl = 'http://localhost:5000/power/'
@@ -24,6 +25,7 @@ export class ProductsService {
   constructor(
     private http: HttpClient,
     private store: Store<AppState>,
+    private router: Router,
     private spiner: NgxSpinnerService,
     private toastr: ToastrService
   ) { }
@@ -50,8 +52,9 @@ export class ProductsService {
     this.http.post(baseUrl + 'create', model)
     .subscribe((res: ResponseDataModel) => {
       this.store.dispatch(new CreateProducts(res.data))
-      this.toastr.success(res.message)
       this.spiner.hide
+      this.router.navigate(['/menu'])
+      this.toastr.success('Product added successfully.')
     })
   }
 
