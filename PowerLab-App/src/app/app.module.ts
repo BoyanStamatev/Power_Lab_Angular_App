@@ -24,7 +24,8 @@ import { appReducers } from './core/store/app.reducers'
 import { environment } from '../environments/environment';
 import { CartComponent } from './components/cart/cart.component'
 import { OrdersModule } from './components/orders/orders.module'
-import { NgxSpinnerModule } from 'ngx-spinner'
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AdminModule } from './components/admin/admin.module'
 export function logger(reducer: ActionReducer<AppState>): any {
   return storeLogger()(reducer)
 }
@@ -36,7 +37,8 @@ export const metaReducers = environment.production ? [] : [logger]
     AppComponent,
     HomeComponent,
     MenuComponent,
-    CartComponent
+    CartComponent,
+    
   ],
   imports: [
     NgbModule,
@@ -56,6 +58,7 @@ export const metaReducers = environment.production ? [] : [logger]
     ProductsModule,
     OrdersModule,
     GuardsModule,
+    AdminModule
 
   ],
   providers: [

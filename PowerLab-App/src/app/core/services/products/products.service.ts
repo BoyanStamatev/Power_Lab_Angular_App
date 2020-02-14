@@ -4,10 +4,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
-import { GetAllProducts, AddProductReview, LikeProduct, UnlikeProduct } from '../../store/products/products.action';
+import { GetAllProducts, AddProductReview, LikeProduct, UnlikeProduct, CreateProducts } from '../../store/products/products.action';
 import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CreateProductModel } from '../../store/products/models/CreateProductsModel';
 
 
 const baseUrl = 'http://localhost:5000/power/'
@@ -15,12 +17,15 @@ const minutes = 1000 * 60 * 5
 
 @Injectable()
 export class ProductsService {
+
   private productsCached: boolean = true
   private cacheTime = new Date().getTime()
 
   constructor(
     private http: HttpClient,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private spiner: NgxSpinnerService,
+    private toastr: ToastrService
   ) { }
 
   getAllProducts() {
@@ -40,18 +45,28 @@ export class ProductsService {
     })
   }
 
-  addProductReview(model: ReviewModel, id: string) {
-      this.store.dispatch(new AddProductReview(model, id))
-      this.http.post(baseUrl+'review/'+id, model).subscribe()
+  createProduct(model: CreateProductModel) {
+    this.spiner.show
+    this.http.post(baseUrl + 'create', model)
+    .subscribe((res: ResponseDataModel) => {
+      this.store.dispatch(new CreateProducts(res.data))
+      this.toastr.success(res.message)
+      this.spiner.hide
+    })
   }
-  
+
+  addProductReview(model: ReviewModel, id: string) {
+    this.store.dispatch(new AddProductReview(model, id))
+    this.http.post(baseUrl + 'review/' + id, model).subscribe()
+  }
+
   likeProduct(id: string, username: string) {
-      this.store.dispatch(new LikeProduct(id, username))
-      this.http.post(`${baseUrl}like/${id}`, {}).subscribe()
+    this.store.dispatch(new LikeProduct(id, username))
+    this.http.post(`${baseUrl}like/${id}`, {}).subscribe()
   }
 
   unlikeProduct(id: string, username: string) {
-      this.store.dispatch(new UnlikeProduct(id, username))
-      this.http.post(`${baseUrl}unlike/${id}`, {}).subscribe()
+    this.store.dispatch(new UnlikeProduct(id, username))
+    this.http.post(`${baseUrl}unlike/${id}`, {}).subscribe()
   }
 }

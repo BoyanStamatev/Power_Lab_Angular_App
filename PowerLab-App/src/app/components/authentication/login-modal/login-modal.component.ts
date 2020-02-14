@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { LoginModel } from '../models/LoginModel';
+import { LoginModel } from '../../../core/store/authentication/models/LoginModel';
 import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
