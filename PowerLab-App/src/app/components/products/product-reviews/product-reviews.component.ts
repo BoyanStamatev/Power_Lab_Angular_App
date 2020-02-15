@@ -6,6 +6,7 @@ import { AppState } from 'src/app/core/store/app.state';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { ReviewModel } from '../../../core/store/products/models/ReviewModel';
 import { ProductsService } from 'src/app/core/services/products/products.service';
+import { toLocaleString } from 'src/app/core/utils/helper-functions';
 
 @Component({
   selector: 'app-product-reviews',
@@ -15,6 +16,7 @@ import { ProductsService } from 'src/app/core/services/products/products.service
 export class ProductReviewsComponent implements OnInit {
 
   protected reviewForm
+  protected toLocaleString = toLocaleString
   @Input() protected reviews: ReviewModel[]
   @Input() private id: string
 
@@ -38,8 +40,7 @@ export class ProductReviewsComponent implements OnInit {
     if (this.reviewForm.invalid) {return}
 
     const formValue = this.reviewForm.value
-    const reviewModel = new ReviewModel(formValue.review, this.authService.getUsername())
-    this.productsService.addProductReview(reviewModel,this.id)
+    this.productsService.addProductReview(formValue, this.id)
     this.reviewForm.reset()
   }
 

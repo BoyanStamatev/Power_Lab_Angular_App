@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderModel } from 'src/app/core/store/orders/models/OrderModel';
 import { Subscription } from 'rxjs';
 import { getTotalSum, toLocaleString } from 'src/app/core/utils/helper-functions';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-order-details',
@@ -22,6 +23,7 @@ export class OrderDetailsComponent extends BaseComponent implements OnInit {
   protected notFoundMessage = 'ORDER NOT FOUND'
 
   constructor(
+    protected authService: AuthenticationService,
     private store: Store<AppState>,
     private route: ActivatedRoute
   ) {
@@ -35,9 +37,10 @@ export class OrderDetailsComponent extends BaseComponent implements OnInit {
       .subscribe(orders => {
         if (orders.userOrders.length > 0) {
           this.order = orders.userOrders.find(o => o._id === this.id)
-        } else if (orders.pendingOrders.length > 0) {
-          this.order = orders.pendingOrders.find(o => o._id === this.id)
-
+        } else {
+          if (orders.pendingOrders.length > 0) {
+            this.order = orders.pendingOrders.find(o => o._id === this.id)
+          }
           if (!this.order && orders.approvedOrders.length > 0) {
             this.order = orders.approvedOrders.find(o => o._id === this.id)
           }

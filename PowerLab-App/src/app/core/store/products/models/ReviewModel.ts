@@ -1,6 +1,8 @@
 export class ReviewModel {
     constructor(
-        public review: string,
-        public createdBy: string
+        public _id: string,
+        public reviewText: string,
+        public creatorUsername: string,
+        public lastModified: Date
     ) { }
 }
