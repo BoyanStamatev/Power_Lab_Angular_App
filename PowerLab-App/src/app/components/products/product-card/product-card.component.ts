@@ -60,4 +60,8 @@ export class ProductCardComponent implements OnInit {
     })
   }
 
+  navigateToEdit() {
+    this.router.navigate([`/admin/product/edit/${this.product._id}`])
+  }
+
 }

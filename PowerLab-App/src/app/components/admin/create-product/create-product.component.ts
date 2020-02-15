@@ -11,7 +11,7 @@ import { CreateProductModel } from 'src/app/core/store/products/models/CreatePro
 })
 export class CreateProductComponent implements OnInit {
 
-public createForm
+  protected createForm
 
   constructor(
     private fb: FormBuilder,
@@ -42,27 +42,27 @@ public createForm
     this.productsService.createProduct(product)
   }
 
-  get name () {
+  get name() {
     return this.createForm.get('name')
   }
 
-  get ingredients () {
+  get ingredients() {
     return this.createForm.get('ingredients')
   }
 
-  get description () {
+  get description() {
     return this.createForm.get('description')
   }
 
-  get image () {
+  get image() {
     return this.createForm.get('image')
   }
 
-  get weight () {
+  get weight() {
     return this.createForm.get('weight')
   }
 
-  get price () {
+  get price() {
     return this.createForm.get('price')
   }
 

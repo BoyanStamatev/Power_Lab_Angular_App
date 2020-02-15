@@ -4,14 +4,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
-import { GetAllProducts, AddProductReview, LikeProduct, UnlikeProduct, CreateProducts, DeleteProduct } from '../../store/products/products.action';
+import { GetAllProducts, AddProductReview, LikeProduct, 
+  UnlikeProduct, CreateProducts, DeleteProduct, EditProduct } from '../../store/products/products.action';
 import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateProductModel } from '../../store/products/models/CreateProductsModel';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 const baseUrl = 'http://localhost:5000/power/'
@@ -51,23 +51,34 @@ export class ProductsService {
   createProduct(model: CreateProductModel) {
     this.spiner.show
     this.http.post(baseUrl + 'create', model)
-    .subscribe((res: ResponseDataModel) => {
-      this.store.dispatch(new CreateProducts(res.data))
-      this.spiner.hide
-      this.router.navigate(['/menu'])
-      this.toastr.success('Product added successfully.')
-    })
+      .subscribe((res: ResponseDataModel) => {
+        this.store.dispatch(new CreateProducts(res.data))
+        this.spiner.hide
+        this.router.navigate(['/menu'])
+        this.toastr.success('Product added successfully.')
+      })
   }
 
   deleteProduct(id: string, activeModal) {
     this.spiner.show
     this.http.delete(baseUrl + 'delete/' + id)
-    .subscribe(res => {
-      this.store.dispatch(new DeleteProduct(id))
-      this.spiner.hide
-      activeModal.close()
-      this.toastr.success('Product deleted successfully.')
-    })
+      .subscribe(res => {
+        this.store.dispatch(new DeleteProduct(id))
+        this.spiner.hide
+        activeModal.close()
+        this.toastr.success('Product deleted successfully.')
+      })
+  }
+
+  editProduct(model: ProductModel) {
+    this.spiner.show()
+    this.http.put(baseUrl + 'edit/' + model._id, model)
+      .subscribe((res: ResponseDataModel) => {
+        this.store.dispatch(new EditProduct(res.data))
+        this.spiner.hide()
+        this.router.navigate(['/menu'])
+        this.toastr.success('Product edited successfully.')
+      })
   }
 
   addProductReview(model: ReviewModel, id: string) {

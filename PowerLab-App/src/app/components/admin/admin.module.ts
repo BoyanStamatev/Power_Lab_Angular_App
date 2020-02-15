@@ -10,7 +10,7 @@ import { adminComponents } from '.';
 
 @NgModule({
   declarations: [
-    ...adminComponents
+    ...adminComponents,
   ],
   imports: [
     CommonModule,
