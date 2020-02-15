@@ -7,11 +7,13 @@ import { BaseComponent } from '../base.component';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/services/orders/orders.service';
+import { animations } from './cart.animations';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  animations: animations
 })
 export class CartComponent extends BaseComponent implements OnInit {
 
@@ -85,6 +87,10 @@ export class CartComponent extends BaseComponent implements OnInit {
     }
 
     this.ordersService.submitNewOrder(products)
+  }
+
+  trackByIds(index: number): number {
+    return index
   }
 
 }

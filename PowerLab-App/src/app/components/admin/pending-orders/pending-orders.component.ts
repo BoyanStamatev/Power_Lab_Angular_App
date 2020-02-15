@@ -5,13 +5,15 @@ import { OrderModel } from 'src/app/core/store/orders/models/OrderModel';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
+import { animations } from './pending-orders.animation'
 import { OrdersService } from 'src/app/core/services/orders/orders.service';
 import { UndoOrdersRequestMade } from 'src/app/core/store/http/http.actions';
 
 @Component({
   selector: 'app-pending-orders',
   templateUrl: './pending-orders.component.html',
-  styleUrls: ['./pending-orders.component.scss']
+  styleUrls: ['./pending-orders.component.scss'],
+  animations: animations
 })
 export class PendingOrdersComponent extends BaseComponent implements OnInit {
 
@@ -45,11 +47,8 @@ export class PendingOrdersComponent extends BaseComponent implements OnInit {
   }
 
   approve(id: string) {
+    const order = this.pendingOrders.find(o => o._id === id)
     this.ordersService.approveOrder(id)
-  }
-
-  changePage (page) {
-    this.currentPage = page
   }
 
   trackByIds(index: number, order: OrderModel): string {

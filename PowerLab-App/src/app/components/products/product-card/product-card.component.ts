@@ -28,10 +28,6 @@ export class ProductCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigateToDetails() {
-    this.router.navigate([`/product/details/${this.product._id}`])
-  }
-
   addToCart () {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/cart'])
@@ -59,9 +55,5 @@ export class ProductCardComponent implements OnInit {
       
     })
   }
-
-  navigateToEdit() {
-    this.router.navigate([`/admin/product/edit/${this.product._id}`])
-  }
-
+  
 }

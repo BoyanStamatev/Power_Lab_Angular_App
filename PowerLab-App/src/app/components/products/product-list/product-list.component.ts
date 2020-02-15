@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsModule } from '../products.module';
 import { ProductModel } from '../../../core/store/products/models/ProductModel';
+import { animations } from './product-list.animation';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+  animations: animations
 })
 export class ProductListComponent implements OnInit {
 
