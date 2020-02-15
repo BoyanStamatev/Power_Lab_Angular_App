@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppState } from '../../store/app.state';
 import { Store, select } from '@ngrx/store';
 import { OrderModel } from '../../store/orders/models/OrderModel';
-import { GetUserOrders, SubmitOrder, GetPendingOrders, ApproveOrder } from '../../store/orders/order.actions';
+import { GetUserOrders, SubmitOrder, GetPendingOrders, ApproveOrder, GetApprovedOrders } from '../../store/orders/order.actions';
 import { OrderProductModel } from '../../store/orders/models/OrderProductModel';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -70,6 +70,16 @@ export class OrdersService {
     this.http
       .post(`${baseUrl}approve/${id}`, {})
       .subscribe()
+  }
+
+  getApprovedOrders() {
+    this.spinner.show()
+
+    this.http.get<OrderModel[]>(`${baseUrl}approved`)
+      .subscribe(orders => {
+        this.store.dispatch(new GetApprovedOrders(orders))
+        this.spinner.hide()
+    })
   }
 
 }

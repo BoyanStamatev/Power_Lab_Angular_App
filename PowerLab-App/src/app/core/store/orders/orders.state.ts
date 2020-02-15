@@ -2,5 +2,6 @@ import { OrderModel } from './models/OrderModel';
 
 export interface OrdersState {
     readonly userOrders: OrderModel[],
-    readonly pendingOrders: OrderModel[]
+    readonly pendingOrders: OrderModel[],
+    readonly approvedOrders: OrderModel[]
 }

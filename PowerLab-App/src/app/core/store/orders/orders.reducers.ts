@@ -2,13 +2,14 @@ import { OrdersState } from "./orders.state";
 import { OrderModel } from './models/OrderModel';
 import {
     GET_USER_ORDERS, SUBMIT_ORDER, DEAUTHENTICATE,
-    GET_PENDING_ORDERS, APPROVE_ORDER
+    GET_PENDING_ORDERS, APPROVE_ORDER, GET_APPROVED_ORDERS
 } from './order.actions';
 
 
 const initialState: OrdersState = {
     userOrders: [],
-    pendingOrders: []
+    pendingOrders: [],
+    approvedOrders: []
 }
 
 function getUserOrders(state: OrdersState, orders: OrderModel[]) {
@@ -20,6 +21,11 @@ function getPendingOrders(state: OrdersState, orders: OrderModel[]) {
         pendingOrders: orders
     })
 }
+function getApprovedOrders(state: OrdersState, orders: OrderModel[]) {
+    return Object.assign({}, state, {
+      approvedOrders: orders
+    })
+  }
 
 function submitOrder(state: OrdersState, order: OrderModel) {
     return Object.assign({}, state, { userOrders: [...state.userOrders, order] })
@@ -28,7 +34,8 @@ function submitOrder(state: OrdersState, order: OrderModel) {
 function removeOrders(state: OrdersState) {
     return Object.assign({}, state, {
         userOrders: [],
-        pendingOrders: []
+        pendingOrders: [],
+        approvedOrders: []
     })
 }
 
@@ -48,6 +55,8 @@ export function ordersReducers(state: OrdersState = initialState, action) {
             return submitOrder(state, action.payload)
         case APPROVE_ORDER:
             return approveOrder(state, action.id)
+        case GET_APPROVED_ORDERS:
+            return getApprovedOrders(state, action.payload)
         case DEAUTHENTICATE:
             return removeOrders(state)
         default:
