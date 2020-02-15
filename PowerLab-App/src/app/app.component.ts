@@ -32,10 +32,14 @@ export class AppComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.productsService.getAllProducts()
 
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated() && !this.authService.isAdmin()) {
       this.ordersService.getUserOrders()
     }
 
+    if (this.authService.isAdmin()) {
+      this.ordersService.getPendingOrders()
+    }
+    
     this.subscription$ = this.store
     .pipe(select(state => state.http.currentGetCalls), delay(0))
     .subscribe(calls => {

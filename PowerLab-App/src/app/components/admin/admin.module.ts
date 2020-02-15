@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { adminComponents } from '.';
+import { SharedModule } from '../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -17,8 +19,10 @@ import { adminComponents } from '.';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     FontAwesomeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule,
   ]
 })
 export class AdminModule { }

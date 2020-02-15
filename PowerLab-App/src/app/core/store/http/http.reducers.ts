@@ -1,6 +1,6 @@
-import { GET_REQUEST_BEGIN, GET_REQUEST_END } from './http.actions'
+import { GET_REQUEST_BEGIN, GET_REQUEST_END, UNDO_ORDERS_REQUEST } from './http.actions'
 import { HttpState } from './http.state'
-import { GET_USER_ORDERS } from '../orders/order.actions'
+import { GET_USER_ORDERS, GET_PENDING_ORDERS } from '../orders/order.actions'
 import { DEAUTHENTICATE } from '../authentication/authentication.actions'
 
 const initialState = {
@@ -19,10 +19,12 @@ export function httpReducer(state: HttpState = initialState, action) {
         currentGetCalls: state.currentGetCalls - 1
       })
       case GET_USER_ORDERS:
+      case GET_PENDING_ORDERS:
         return Object.assign({}, state, {
           ordersRequestMade: true
         })
       case DEAUTHENTICATE:
+        case UNDO_ORDERS_REQUEST:
       return Object.assign({}, state, {
         ordersRequestMade: false
       })
