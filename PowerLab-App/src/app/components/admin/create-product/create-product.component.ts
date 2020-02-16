@@ -29,7 +29,7 @@ export class CreateProductComponent implements OnInit {
       ],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       image: ['', [Validators.required, Validators.minLength(14), Validators.pattern('^(http|https):\/\/[a-zA-Z0-9]+.*$')]],
-      weight: ['', [Validators.required, Validators.min(250), Validators.max(800)]],
+      weight: ['', [Validators.required, Validators.min(1), Validators.max(20000)]],
       price: ['', [Validators.required, Validators.min(0)]]
     })
   }

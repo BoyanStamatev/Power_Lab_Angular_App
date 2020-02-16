@@ -1,15 +1,11 @@
-import { Injectable } from '@angular/core';
-import { 
-  CanLoad, 
-  Route, 
-  UrlSegment, 
-  ActivatedRouteSnapshot, 
-  RouterStateSnapshot, 
-  UrlTree, 
+import {
+  CanLoad,
   Router
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
+} from '@angular/router'
+import { Injectable } from '@angular/core'
+
+import { AuthenticationService } from '../../services/authentication/authentication.service'
+import { Route } from '@angular/compiler/src/core'
 
 @Injectable({
   providedIn: 'root'
@@ -18,18 +14,16 @@ export class AdminGuard implements CanLoad {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
-    ) {}
+    private router: Router) { }
 
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    
-      if (this.authService.isAdmin()) {
-        return true
-      }
-   
-      this.router.navigate(['/'])
-      return false
-  }
+  canLoad(route: Route) {
+
+    if (this.authService.isAdmin()) {
+      return true
+    }
+
+    this.router.navigate(['/'])
+    return false
+  };
+
 }

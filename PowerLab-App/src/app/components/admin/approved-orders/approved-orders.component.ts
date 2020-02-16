@@ -36,9 +36,7 @@ export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
     this.subscription$ = this.store
       .pipe(select(state => state))
       .subscribe(state => {
-        if (state.http.ordersRequestMade) {
           this.approvedOrders = state.orders.approvedOrders.sort((a: OrderModel, b: OrderModel) => +new Date(b.date) - +new Date(a.date))
-        }
       })
 
     this.subscriptions.push(this.subscription$)
@@ -48,7 +46,7 @@ export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
     this.currentPage = page
   }
 
-  trackByIds(index: number, order: OrderModel): string {
+  trackByIds(order: OrderModel): string {
     return order._id
   }
 }

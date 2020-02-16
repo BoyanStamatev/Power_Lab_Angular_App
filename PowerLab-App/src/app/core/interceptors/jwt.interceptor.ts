@@ -36,7 +36,7 @@ export class JWTInterceptor implements HttpInterceptor {
         }
 
         return next.handle(req).pipe(tap((res: HttpEvent<any>) => {
-            if(res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/signup')) {
+            if(res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/login')) {
                 this.saveToken(res.body)
             }
 

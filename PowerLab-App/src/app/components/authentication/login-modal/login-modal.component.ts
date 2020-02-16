@@ -44,17 +44,14 @@ export class LoginModalComponent extends BaseComponent implements OnInit {
     if(this.loginForm.invalid) {return}
 
     this.spinner.show()
-    this.authService.login(this.loginForm.value).subscribe(() => {
-      const formValue = this.loginForm.value
-      const loginModel: LoginModel = {email: formValue.email, password: formValue.password}
-      this.subscription$ = this.authService.login(loginModel).subscribe(() => {
+    const formValue = this.loginForm.value
+    const loginModel = new LoginModel(formValue.email, formValue.password)
+    this.subscription$ = this.authService.login(loginModel).subscribe(() => {
         this.spinner.hide()
         this.activeModal.close()
-      })
-      this.subscriptions.push(this.subscription$)
     })
-    
+
+    this.subscriptions.push(this.subscription$)
   }
+    
 }
-
-

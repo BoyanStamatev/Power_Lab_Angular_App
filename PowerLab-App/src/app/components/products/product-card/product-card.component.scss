@@ -1,9 +1,19 @@
+.card-body {
+  height: 180px;
+}
+
 img {
-  width: 300px;
-  height: 200px;
+  width: 320px;
+  height: 260px;
+  margin-left: 13px;
+}
+
+.card-title {
+  color: chartreuse;
 }
 
 .text-p {
+  color: rgb(255, 255, 0)!important;
   width: 318px; 
   height: 120px;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ProductModel } from '../../core/store/products/models/ProductModel';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 import { AppState } from 'src/app/core/store/app.state';
@@ -16,8 +16,8 @@ import { BaseComponent } from '../base.component';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 
- protected products: ProductModel[]
- private subscription$: Subscription
+  protected products: ProductModel[]
+  private subscription$: Subscription
 
   constructor(
     protected authService: AuthenticationService,
@@ -26,29 +26,29 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private modalService: NgbModal
   ) {
     super()
-   }
+  }
 
   ngOnInit() {
     this.productsService.getAllProducts()
 
     this.subscription$ = this.store.pipe(select(state => state.products.all))
-    .subscribe(products => {
-      this.products = products
-      .sort((a,b) => b.likes.length - a.likes.length)
-      .slice(0, 3) 
-    })
+      .subscribe(products => {
+        this.products = products
+          .sort((a, b) => b.likes.length - a.likes.length)
+          .slice(0, 3)
+      })
 
-      this.subscriptions.push(this.subscription$)
+    this.subscriptions.push(this.subscription$)
   }
 
   openRegisterModal() {
     const registerRef = this.modalService.open(RegisterModalComponent)
     registerRef.result.then((res) => {
-      console.log('(f)openRegisterModal :', res)
-      
+      // console.log('(f)openRegisterModal :', res)
+
     }).catch((err) => {
       console.log('(f)openRegisterModal :', err)
-      
+
     })
 
   }

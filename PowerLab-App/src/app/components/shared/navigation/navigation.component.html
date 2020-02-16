@@ -10,20 +10,16 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/menu">Menu</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()"> -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()">
         <a class="nav-link" routerLink="/orders/my">My Orders</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()"> -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()">
         <a class="nav-link" routerLink="/cart">Cart</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.isAdmin()"> -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.isAdmin()">
         <a class="nav-link" routerLink="/admin/product/create">Create New Power</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.isAdmin()"> -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.isAdmin()">
         <a class="nav-link" routerLink="/admin/orders/pending">Pending Orders</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.isAdmin()">

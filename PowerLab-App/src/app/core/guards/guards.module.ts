@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from './authentication/authentication.guard';
 import { AdminGuard } from './authentication/admin.guard';
-import { AuthenticationGuard } from './authentication/authentication.guard';
-
-
+import { AuthLazyGuard } from './authentication/auth-lazy.guard';
 
 @NgModule({
   declarations: [],
-  providers: [ AuthenticationGuard, AdminGuard ],
+  providers: [ AuthGuard, AdminGuard, AuthLazyGuard ],
   imports: [
     CommonModule
   ]

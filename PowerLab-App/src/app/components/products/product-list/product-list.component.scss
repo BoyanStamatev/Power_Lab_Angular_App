@@ -3,8 +3,14 @@
     text-align: center
   } 
 
+  //.card-blockquote>img {
+  //  width: 100%;
+  // }
+
   .product-card {
+    background-image: url("../../shared/pictures/PowerCard.jpg");
     width: 348px;
-    height: 470.2px;
-    margin: 10px;
-  } 
+    height: 260x;
+    margin-left: 28px;
+    margin-bottom: 20px;
+  }

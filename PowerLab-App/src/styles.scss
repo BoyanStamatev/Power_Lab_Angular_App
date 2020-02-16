@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+  }
+  
+  body {
+    background-image: url("./app/components/shared/pictures/PowerBackground.jpg");
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    padding-bottom: 2rem;
+    min-height: 100%;
+  }

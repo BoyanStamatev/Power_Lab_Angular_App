@@ -14,7 +14,7 @@ import { LoginModalComponent } from 'src/app/components/authentication/login-mod
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   
 constructor(
   private authService: AuthenticationService,

@@ -37,7 +37,7 @@ export class NavigationComponent implements OnInit {
   openLoginModal() {
     const loginRef = this.modalService.open(LoginModalComponent)
     loginRef.result.then(res => {
-      console.log(res);
+      // console.log(res);
     }).catch(err => {
       console.log(err);
     })

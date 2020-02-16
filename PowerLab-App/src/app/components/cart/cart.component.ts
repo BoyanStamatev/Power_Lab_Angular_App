@@ -5,7 +5,6 @@ import { ProductInCartModel } from 'src/app/core/models/ProductInCartModel';
 import { SyncCart, RemoveFromCart } from 'src/app/core/store/cart/cart.actions';
 import { BaseComponent } from '../base.component';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/services/orders/orders.service';
 import { animations } from './cart.animations';
 
@@ -23,7 +22,6 @@ export class CartComponent extends BaseComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router,
     private ordersService: OrdersService
     ) {
     super()

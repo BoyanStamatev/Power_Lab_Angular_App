@@ -27,6 +27,15 @@ export class AuthenticationService {
     private store: Store<AppState>
   ) { 
 
+    this.store.pipe(select(state => state.authentication.isAdmin))
+      .subscribe(data => this.isUserAdmin = data)
+
+    this.store.pipe(select(state => state.authentication.isAuthenticated))
+      .subscribe(data => this.isUserAuthenticated = data)
+      
+    this.store.pipe(select(state => state.authentication.username))
+      .subscribe(data => this.username = data)
+
     if (localStorage.getItem('authtoken')) {
       const authtoken = localStorage.getItem('authtoken')
 
@@ -41,15 +50,6 @@ export class AuthenticationService {
       } catch (err){
         this.toastr.error('Invalid token', 'Warning!')
       }
-
-      this.store.pipe(select(state => state.authentication.username))
-      .subscribe(data => this.username = data)
-
-      this.store.pipe(select(state => state.authentication.isAdmin))
-      .subscribe(data => this.isUserAdmin = data)
-
-      this.store.pipe(select(state => state.authentication.isAuthenticated))
-      .subscribe(data => this.isUserAuthenticated = data)
 
     }
   }

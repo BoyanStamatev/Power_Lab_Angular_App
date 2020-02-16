@@ -28,9 +28,9 @@ function validatePowerCreateForm (payload) {
     errors.description = 'Description must be at least 10 symbols and less than 120 symbols.'
   }
 
-  if (!payload || !payload.weight || payload.weight < 250 || payload.weight > 800) {
+  if (!payload || !payload.weight || payload.weight < 1 || payload.weight > 20000) {
     isFormValid = false
-    errors.year = 'Weight must be between 250 and 800 grams.'
+    errors.year = 'Weight must be between 1 and 20000 grams.'
   }
 
   if (!payload || !payload.price || payload.price < 0) {

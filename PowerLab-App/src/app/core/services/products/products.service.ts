@@ -15,12 +15,14 @@ import { Router } from '@angular/router';
 
 
 const baseUrl = 'http://localhost:5000/power/'
+const addReviewUrl = 'http://localhost:5000/reviews/create/'
+
 const minutes = 1000 * 60 * 5
 
 @Injectable()
 export class ProductsService {
 
-  private productsCached: boolean = true
+  private productsCached: boolean = false
   private cacheTime = new Date().getTime()
 
   constructor(
@@ -35,8 +37,8 @@ export class ProductsService {
     if (this.productsCached && (new Date().getTime() - this.cacheTime) < minutes) {
       return
     }
-    this.productsCached = false
-    this.cacheTime = null
+    this.productsCached = true
+    this.cacheTime = new Date().getTime()
 
     this.store.dispatch(new GetRequestBegin())
 
@@ -72,7 +74,7 @@ export class ProductsService {
 
   editProduct(model: ProductModel) {
     this.spiner.show()
-    this.http.put(baseUrl + 'edit/' + model._id, model)
+    this.http.post(baseUrl + 'edit/' + model._id, model)
       .subscribe((res: ResponseDataModel) => {
         this.store.dispatch(new EditProduct(res.data))
         this.spiner.hide()
@@ -82,8 +84,13 @@ export class ProductsService {
   }
 
   addProductReview(model: ReviewModel, id: string) {
-    this.store.dispatch(new AddProductReview(model, id))
-    this.http.post(baseUrl + 'review/' + id, model).subscribe()
+    this.spiner.show()
+    this.http.post(`${addReviewUrl}${id}`, model)
+    .subscribe((res: ResponseDataModel) => {
+      this.store.dispatch(new AddProductReview(res.data, id))
+      this.spiner.hide()
+      this.toastr.success('Review added successfully.')
+    })
   }
 
   likeProduct(id: string, username: string) {
