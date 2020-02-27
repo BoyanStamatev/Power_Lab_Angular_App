@@ -7,8 +7,8 @@ import { productsComponent } from '.';
 import { ProductsRoutingModule } from './products.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { ProductDeleteModalComponent } from './product-delete-modal/product-delete-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -22,13 +22,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     NgxPaginationModule,
     ProductsRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   exports: [
     ...productsComponent
   ],
   entryComponents: [
-    ProductDeleteModalComponent
+    ...productsComponent
   ]
 })
 export class ProductsModule { }

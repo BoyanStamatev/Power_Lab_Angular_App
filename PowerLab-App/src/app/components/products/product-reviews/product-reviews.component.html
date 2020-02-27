@@ -9,7 +9,6 @@
             [ngClass]="{ 'is-invalid': review.touched && review.errors }">
           </textarea>
           <div *ngIf="review.errors" class="invalid-feedback">
-            <div *ngIf="review.errors.required">Review is required!</div>
             <div *ngIf="review.errors.minlength">Review must be at least 4 characters!</div>
           </div>
         </div>
@@ -18,13 +17,17 @@
         </div>
       </form>
     </div>
-      <div class="col-md-8 review" *ngFor="let r of reviews">
+      <div class="col-md-8 review" [@reviews] *ngFor="let r of reviews">
         <div class="card text-black bg-light">
           <div class="card-body">
             <blockquote class="card-blockquote">
               <p class="h6">{{r.reviewText}}</p>
-              <button class="btn btn-danger float-right btn-sm custom-button" *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"><i class="fa fa-trash"></i></button>
-              <button class="btn btn-warning float-right btn-sm custom-button" *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger float-right btn-sm custom-button" 
+              *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"
+              (click)="deleteReview(r._id)" ><i class="fa fa-trash"></i></button>
+              <button class="btn btn-warning float-right btn-sm custom-button" 
+              *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"
+               (click)="openEditReviewModal(r._id)"><i class="fa fa-edit"></i></button>
               <footer class="review-footer">
                 <cite class="text-capitalize footer-color">"{{r.creatorUsername}}"</cite>
                 <span class="review-date footer-color">

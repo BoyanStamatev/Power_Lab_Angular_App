@@ -57,7 +57,7 @@ function validatePowerCreateForm (payload) {
 router.get('/all', (req, res) => {
   Power
     .find()
-    .populate('reviews')
+    // .populate('reviews')
     .then(powers => {
       res.status(200).json(powers)
     })
@@ -65,7 +65,7 @@ router.get('/all', (req, res) => {
 
 router.post('/create', authCheck, (req, res) => {
   const powerObj = req.body
-  if (req.user.roles.indexOf('Admin') > -1) {
+  if (req.user.roles.includes('Admin')) {
     const validationResult = validatePowerCreateForm(powerObj)
     if (!validationResult.success) {
       return res.status(400).json({
@@ -87,7 +87,6 @@ router.post('/create', authCheck, (req, res) => {
         })
       })
       .catch((err) => {
-        console.log(err)
         let message = 'Something went wrong :( Check the form for errors.'
         if (err.code === 11000) {
           message = 'Power with the given name already exists.'
@@ -106,7 +105,7 @@ router.post('/create', authCheck, (req, res) => {
 })
 
 router.post('/edit/:id', authCheck, (req, res) => {
-  if (req.user.roles.indexOf('Admin') > -1) {
+  if (req.user.roles.includes('Admin')) {
     const powerId = req.params.id
     const powerObj = req.body
     const validationResult = validatePowerCreateForm(powerObj)
@@ -169,7 +168,7 @@ router.post('/edit/:id', authCheck, (req, res) => {
 
 router.delete('/delete/:id', authCheck, (req, res) => {
   const id = req.params.id
-  if (req.user.roles.indexOf('Admin') > -1) {
+  if (req.user.roles.includes('Admin')) {
     Power
       .findById(id)
       .then((power) => {

@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { ToastrService } from 'ngx-toastr';
 import { RegisterModel } from '../../../core/store/authentication/models/RegisterModel';
 import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';

@@ -4,12 +4,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { ProductReviewsComponent } from './product-reviews/product-reviews.component';
 import { ProductDeleteModalComponent } from './product-delete-modal/product-delete-modal.component';
+import { ProductReviewsEditModalComponent } from './product-reviews-edit-modal/product-reviews-edit-modal.component';
 
 export const productsComponent = [
     ProductListComponent,
     ProductCardComponent,
     ProductDetailsComponent,
     DetailsPageComponent,
+    ProductDeleteModalComponent,
     ProductReviewsComponent,
-    ProductDeleteModalComponent
+    ProductReviewsEditModalComponent
 ]

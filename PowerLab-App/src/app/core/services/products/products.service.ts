@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
-import { GetAllProducts, AddProductReview, LikeProduct, 
-  UnlikeProduct, CreateProducts, DeleteProduct, EditProduct } from '../../store/products/products.action';
-import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
+import { GetAllProducts, LikeProduct, 
+  UnlikeProduct, CreateProducts, DeleteProduct, EditProduct } from '../../store/products/products.actions';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,8 +14,6 @@ import { Router } from '@angular/router';
 
 
 const baseUrl = 'http://localhost:5000/power/'
-const addReviewUrl = 'http://localhost:5000/reviews/create/'
-
 const minutes = 1000 * 60 * 5
 
 @Injectable()
@@ -81,16 +78,6 @@ export class ProductsService {
         this.router.navigate(['/menu'])
         this.toastr.success('Product edited successfully.')
       })
-  }
-
-  addProductReview(model: ReviewModel, id: string) {
-    this.spiner.show()
-    this.http.post(`${addReviewUrl}${id}`, model)
-    .subscribe((res: ResponseDataModel) => {
-      this.store.dispatch(new AddProductReview(res.data, id))
-      this.spiner.hide()
-      this.toastr.success('Review added successfully.')
-    })
   }
 
   likeProduct(id: string, username: string) {

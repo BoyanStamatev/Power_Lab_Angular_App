@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store'
 import { ProductModel } from 'src/app/core/store/products/models/ProductModel'
-import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel'
+import { ReviewModel } from '../reviews/models/ReviewModel'
 
 export const GET_ALL = '[PRODUCTS] GET_ALL'
 export const CREATE_PRODUCTS = '[PRODUCTS] CREATE_PRODUCTS'
 export const DELETE_PRODUCT = '[PRODUCTS] DELETE_PRODUCT'
 export const EDIT_PRODUCT = '[PRODUCTS] EDIT_PRODUCT'
-export const ADD_REVIEW = '[PRODUCTS] ADD_REVIEW'
+export const ADD_REVIEW_ID = '[PRODUCTS] ADD_REVIEW_ID'
+export const DELETE_REVIEW_ID = '[PRODUCTS] DELETE_REVIEW_ID'
 export const LIKE_PRODUCT = '[PRODUCTS] LIKE'
 export const UNLIKE_PRODUCT = '[PRODUCTS] UNLIKE'
 
@@ -25,20 +26,25 @@ export class CreateProducts implements Action {
 export class DeleteProduct implements Action {
   readonly type: string = DELETE_PRODUCT
 
-  constructor(public id: string) {}
+  constructor(public id: string) { }
 }
 
 export class EditProduct implements Action {
-  readonly type: string =  EDIT_PRODUCT
-  
-  constructor(public payload: ProductModel) {}
+  readonly type: string = EDIT_PRODUCT
+
+  constructor(public payload: ProductModel) { }
 }
 
+export class AddProductReviewId implements Action {
+  readonly type: string = ADD_REVIEW_ID
 
-export class AddProductReview implements Action {
-  readonly type: string = ADD_REVIEW
+  constructor(public reviewId: string, public productId: string) { }
+}
 
-  constructor(public review: ReviewModel, public productId: string) { }
+export class DeleteProductReviewId implements Action {
+  readonly type: string = DELETE_REVIEW_ID
+
+  constructor(public productId: string, public reviewId: string) { }
 }
 
 export class LikeProduct implements Action {

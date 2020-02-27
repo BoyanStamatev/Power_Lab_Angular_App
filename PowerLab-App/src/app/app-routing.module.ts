@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
-    // { path: 'product', loadChildren: './components/products/products.module#ProductsModule', canLoad: [AuthLazyGuard] },
+  // { path: 'product', loadChildren: './components/products/products.module#ProductsModule', canLoad: [AuthLazyGuard] },
   // { path: 'orders', loadChildren: './components/orders/orders.module#OrdersModule', canLoad: [AuthLazyGuard] },
   // { path: 'admin', loadChildren: './components/admin/admin.module#AdminModule', canLoad: [AdminGuard] },
   { path: 'product', canLoad: [AuthLazyGuard], loadChildren: () => ProductsModule },

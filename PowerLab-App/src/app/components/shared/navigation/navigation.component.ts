@@ -28,7 +28,7 @@ export class NavigationComponent implements OnInit {
   openRegisterModal() {
     const registerRef = this.modalService.open(RegisterModalComponent)
     registerRef.result.then(res => {
-      console.log(res);
+      // console.log(res);
     }).catch(err => {
       console.log(err);
     })

@@ -1,0 +1,27 @@
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Review</h4>
+      <fa-icon class="close" (click)="activeModal.dismiss('Cross click')" [icon]="faWindowClose"></fa-icon>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="reviewEditForm" (ngSubmit)="submitForm()">
+        <div class="container">
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              formControlName="review"
+              [ngClass]="{ 'is-invalid': review.touched && review.errors }">
+            </textarea>
+            <div *ngIf="review.errors" class="invalid-feedback">
+              <div *ngIf="review.errors.minlength">Review must be at least 4 characters!</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" [disabled]="!reviewEditForm.valid">
+            Edit review
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

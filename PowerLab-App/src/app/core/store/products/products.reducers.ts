@@ -1,8 +1,9 @@
 import { ProductsState } from "./products.state";
-import { GET_ALL, ADD_REVIEW, LIKE_PRODUCT, UNLIKE_PRODUCT, CREATE_PRODUCTS,
-         DELETE_PRODUCT, EDIT_PRODUCT} from './products.action';
+import {
+  GET_ALL, CREATE_PRODUCTS, DELETE_PRODUCT, EDIT_PRODUCT,
+  LIKE_PRODUCT, UNLIKE_PRODUCT, ADD_REVIEW_ID, DELETE_REVIEW_ID
+} from './products.actions';
 import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
-import { ReviewModel } from 'src/app/core/store/products/models/ReviewModel';
 
 
 const initialState: ProductsState = {
@@ -24,16 +25,26 @@ function deleteProduct(state: ProductsState, id: string) {
   })
 }
 
-function EditProduct (state: ProductsState, product: ProductModel) {
-  return Object.assign({}, state, 
+function editProduct(state: ProductsState, product: ProductModel) {
+  return Object.assign({}, state,
     { all: [...state.all.filter(p => p._id !== product._id), product] })
 }
 
-function addProductReview(state: ProductsState, review: ReviewModel, productId: string) {
+function addReviewId(state: ProductsState, reviewId: string, productId: string) {
   const allProductsCopy = state.all.slice()
   const product = allProductsCopy.find(p => p._id === productId)
   if (product) {
-    product.reviews.push(review)
+    product.reviews.push(reviewId)
+  }
+
+  return Object.assign({}, state, { all: allProductsCopy })
+}
+
+function deleteReviewId(state: ProductsState, productId: string, reviewId: string) {
+  const allProductsCopy = state.all.slice()
+  const product = allProductsCopy.find(p => p._id === productId)
+  if (product) {
+    product.reviews = product.reviews.filter(r => r !== reviewId)
   }
 
   return Object.assign({}, state, { all: allProductsCopy })
@@ -48,7 +59,6 @@ function likeProduct(state: ProductsState, id: string, username: string) {
 
   return Object.assign({}, state, { all: allProductsCopy })
 }
-
 
 function unlikeProduct(state: ProductsState, id: string, username: string) {
   const allProductsCopy = state.all.slice()
@@ -70,9 +80,11 @@ export function productsReducer(state: ProductsState = initialState, action) {
     case DELETE_PRODUCT:
       return deleteProduct(state, action.id)
     case EDIT_PRODUCT:
-      return EditProduct(state, action.payload)
-    case ADD_REVIEW:
-      return addProductReview(state, action.review, action.productId)
+      return editProduct(state, action.payload)
+    case ADD_REVIEW_ID:
+      return addReviewId(state, action.reviewId, action.productId)
+      case DELETE_REVIEW_ID:
+      return deleteReviewId(state, action.productId, action.reviewId)
     case LIKE_PRODUCT:
       return likeProduct(state, action.id, action.username)
     case UNLIKE_PRODUCT:
