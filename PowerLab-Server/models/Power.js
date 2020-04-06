@@ -136,6 +136,6 @@ module.exports.seedPowers = () => {
     Power
       .create(powersSeed)
       .then(() => console.log('Seeded powers successfully.'))
-      .catch((error) => console.log(error))
+      .catch((error) => console.log('Seeded powers err: ', error))
   })
 }

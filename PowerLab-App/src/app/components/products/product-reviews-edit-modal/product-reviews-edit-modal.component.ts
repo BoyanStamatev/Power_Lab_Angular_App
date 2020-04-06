@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -9,7 +8,6 @@ import { ReviewModel } from 'src/app/core/store/reviews/models/ReviewModel';
 import { ReviewsService } from 'src/app/core/services/reviews/reviews.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({

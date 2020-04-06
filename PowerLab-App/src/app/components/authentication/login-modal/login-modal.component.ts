@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginModalComponent extends BaseComponent implements OnInit {
 
-  protected loginForm
+  protected loginForm: FormGroup
   protected faWindowClose = faWindowClose
   private subscription$: Subscription
   
