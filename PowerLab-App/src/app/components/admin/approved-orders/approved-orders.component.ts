@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { getTotalSum, toLocaleString } from 'src/app/core/utils/helper-functions';
-import { OrderModel } from 'src/app/core/store/orders/models/OrderModel';
+import { OrderModel } from 'src/app/core/models/OrderModel';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
@@ -46,7 +46,4 @@ export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
     this.currentPage = page
   }
 
-  trackByIds(order: OrderModel): string {
-    return order._id
-  }
 }

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import AuthenticationDataModel from '../../models/AuthnticationDataModel'
+import { AuthenticationDataModel } from '../../models/AuthnticationDataModel'
 
 export const AUTHENTICATE = '[AUTHENTICATION] AUTHENTICATE'
 export const DEAUTHENTICATE = '[AUTHENTICATION] DEAUTHENTICATE'

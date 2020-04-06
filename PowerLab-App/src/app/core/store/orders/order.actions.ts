@@ -1,4 +1,4 @@
-import { OrderModel } from './models/OrderModel'
+import { OrderModel } from '../../models/OrderModel'
 import { Action } from '@ngrx/store'
 
 export const GET_USER_ORDERS = '[ORDERS] GET_USER_ORDERS'

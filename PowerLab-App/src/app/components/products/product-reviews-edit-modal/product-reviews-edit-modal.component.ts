@@ -4,7 +4,7 @@ import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
-import { ReviewModel } from 'src/app/core/store/reviews/models/ReviewModel';
+import { ReviewModel } from 'src/app/core/models/ReviewModel';
 import { ReviewsService } from 'src/app/core/services/reviews/reviews.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'

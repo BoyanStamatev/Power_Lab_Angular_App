@@ -3,7 +3,7 @@ import {
   GET_ALL, CREATE_PRODUCTS, DELETE_PRODUCT, EDIT_PRODUCT,
   LIKE_PRODUCT, UNLIKE_PRODUCT, ADD_REVIEW_ID, DELETE_REVIEW_ID
 } from './products.actions';
-import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
+import { ProductModel } from 'src/app/core/models/ProductModel';
 
 
 const initialState: ProductsState = {

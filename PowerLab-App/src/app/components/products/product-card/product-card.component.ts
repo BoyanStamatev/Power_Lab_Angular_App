@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductModel } from '../../../core/store/products/models/ProductModel';
+import { ProductModel } from '../../../core/models/ProductModel';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -34,11 +34,12 @@ export class ProductCardComponent implements OnInit {
       return
     }
 
-    const productToAdd = new CartProductModel(
-      this.product._id,
-      this.product.name,
-      1,
-      this.product.price)
+    const productToAdd: CartProductModel = {
+      productId: this.product._id,
+      productName: this.product.name,
+      quantity: 1,
+      price: this.product.price
+    }
 
     this.store.dispatch(new AddToCart(productToAdd))
     this.router.navigate(['/cart'])

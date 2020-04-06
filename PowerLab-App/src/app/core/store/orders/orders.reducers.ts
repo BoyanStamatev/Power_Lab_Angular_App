@@ -1,5 +1,5 @@
 import { OrdersState } from "./orders.state";
-import { OrderModel } from './models/OrderModel';
+import { OrderModel } from '../../models/OrderModel';
 import {
     GET_USER_ORDERS, SUBMIT_ORDER, DEAUTHENTICATE,
     GET_PENDING_ORDERS, APPROVE_ORDER, GET_APPROVED_ORDERS

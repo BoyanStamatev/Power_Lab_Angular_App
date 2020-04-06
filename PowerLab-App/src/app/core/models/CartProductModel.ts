@@ -1,7 +1,6 @@
-export class CartProductModel {
-    constructor (
-      public productId: string,
-      public productName: string,
-      public quantity: number,
-      public price: number) { }
-  }
+export interface CartProductModel {
+  productId: string
+  productName: string
+  quantity: number
+  price: number
+}

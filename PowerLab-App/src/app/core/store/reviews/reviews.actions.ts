@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { ReviewModel } from './models/ReviewModel'
+import { ReviewModel } from '../../models/ReviewModel'
 
 export const GET_ALL = '[REVIEWS] GET_ALL'
 export const ADD_REVIEW = '[REVIEWS] ADD_REVIEW'

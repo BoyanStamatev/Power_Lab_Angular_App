@@ -1,6 +1,6 @@
 import { ReviewsState } from './reviews.state';
 import { GET_ALL, ADD_REVIEW, DELETE_REVIEW, EDIT_REVIEW, } from './reviews.actions';
-import { ReviewModel } from './models/ReviewModel';
+import { ReviewModel } from '../../models/ReviewModel';
 
 const intialState: ReviewsState = {
   all: []

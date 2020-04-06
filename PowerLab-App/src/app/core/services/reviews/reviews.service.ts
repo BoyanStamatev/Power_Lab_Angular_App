@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ReviewModel } from '../../store/reviews/models/ReviewModel';
+import { ReviewModel } from '../../models/ReviewModel';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { AddProductReview, DeleteProductReview, GetAllReviews, EditProductReview } from '../../store/reviews/reviews.actions';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';

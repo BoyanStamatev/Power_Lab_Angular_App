@@ -1,6 +1,6 @@
-export class ResponseDataModel {
-    public success: boolean
-    public data?
-    public message?: string
-    public errors?
-  }
+export interface ResponseDataModel {
+  success: boolean
+  data?: any
+  message?: string
+  errors?: any
+}

@@ -1,6 +1,6 @@
 import { OrderProductModel } from './OrderProductModel';
 
-export class OrderModel {
+export interface OrderModel {
     _id: string
     creator: string
     creatorEmail: string

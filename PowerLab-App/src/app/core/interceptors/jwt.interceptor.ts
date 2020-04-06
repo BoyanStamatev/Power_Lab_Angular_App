@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators'
 import * as jwt_decode from '../../../../node_modules/jwt-decode'
 import { AppState } from '../store/app.state';
 import { Store, select } from '@ngrx/store';
-import AuthenticationDataModel from '../models/AuthnticationDataModel';
+import { AuthenticationDataModel } from '../models/AuthnticationDataModel';
 import { Authenticate } from '../store/authentication/authentication.actions';
 
 
@@ -61,7 +61,7 @@ export class JWTInterceptor implements HttpInterceptor {
     private decodeToken(token) {
         try {
             const decoded = jwt_decode(token)
-            const authData = new AuthenticationDataModel(token, decoded.username, decoded.isAdmin, true)
+            const authData: AuthenticationDataModel = {token: token, username: decoded.username, isAdmin: decoded.isAdmin, isAuthenticated: true}
             this.store.dispatch(new Authenticate(authData))
             return true
         } catch {

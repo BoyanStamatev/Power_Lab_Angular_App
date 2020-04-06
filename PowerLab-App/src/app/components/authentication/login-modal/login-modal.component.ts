@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { LoginModel } from '../../../core/store/authentication/models/LoginModel';
+import { LoginModel } from '../../../core/models/LoginModel';
 import { BaseComponent } from '../../base.component';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -45,7 +45,8 @@ export class LoginModalComponent extends BaseComponent implements OnInit {
 
     this.spinner.show()
     const formValue = this.loginForm.value
-    const loginModel = new LoginModel(formValue.email, formValue.password)
+    // const registerModel: RegisterModel = {username: formValue.username, email:formValue.email, password:formValue.password} 
+    const loginModel: LoginModel = {email: formValue.email, password: formValue.password}
     this.subscription$ = this.authService.login(loginModel).subscribe(() => {
         this.spinner.hide()
         this.activeModal.close()

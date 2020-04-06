@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 import CustomValidators from 'src/app/core/utils/CustomValidators';
-import { CreateProductModel } from 'src/app/core/store/products/models/CreateProductsModel';
+import { CreateProductModel } from 'src/app/core/models/CreateProductsModel';
 
 @Component({
   selector: 'app-create-product',
@@ -37,7 +37,7 @@ export class CreateProductComponent implements OnInit {
   create() {
     if (this.createForm.invalid) { return }
 
-    const product: CreateProductModel = Object.assign({}, this.createForm.value)
+    const product: CreateProductModel = this.createForm.value
 
     this.productsService.createProduct(product)
   }

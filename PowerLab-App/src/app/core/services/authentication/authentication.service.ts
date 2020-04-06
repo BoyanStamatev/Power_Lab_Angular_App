@@ -3,12 +3,12 @@ import * as jwt_decode from '../../../../../node_modules/jwt-decode'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
-import { RegisterModel } from '../../store/authentication/models/RegisterModel'
-import { LoginModel } from '../../store/authentication/models/LoginModel'
+import { RegisterModel } from '../../models/RegisterModel'
+import { LoginModel } from '../../models/LoginModel'
 import { AppState } from '../../store/app.state'
 import { Store, select } from '@ngrx/store'
 import { Authenticate, Deauthenticate } from '../../store/authentication/authentication.actions'
-import AuthenticationDataModel from '../../models/AuthnticationDataModel'
+import { AuthenticationDataModel } from '../../models/AuthnticationDataModel'
 
 const loginUrl = 'http://localhost:5000/auth/login'
 const registerUrl = 'http://localhost:5000/auth/signup'
@@ -37,13 +37,13 @@ export class AuthenticationService {
       .subscribe(data => this.username = data)
 
     if (localStorage.getItem('authtoken')) {
-      const authtoken = localStorage.getItem('authtoken')
+      const token = localStorage.getItem('authtoken')
 
       try{
-        const decoded = jwt_decode(authtoken)
+        const decoded = jwt_decode(token)
         if (!this.isTokenExpired(decoded)) {
 
-          const authData = new AuthenticationDataModel(authtoken, decoded.username, decoded.isAdmin, true)
+          const authData: AuthenticationDataModel = {token: token, username: decoded.username, isAdmin: decoded.isAdmin, isAuthenticated: true}
 
           this.store.dispatch(new Authenticate(authData))
         }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
-import { ReviewModel } from '../../../core/store/reviews/models/ReviewModel';
+import { ReviewModel } from '../../../core/models/ReviewModel';
 import { toLocaleString } from 'src/app/core/utils/helper-functions';
 import { animations } from './product-reviews.animations';
 import { ReviewsService } from 'src/app/core/services/reviews/reviews.service';

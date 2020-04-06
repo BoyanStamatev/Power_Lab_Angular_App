@@ -3,7 +3,7 @@ import { BaseComponent } from '../../base.component';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { ActivatedRoute } from '@angular/router';
-import { OrderModel } from 'src/app/core/store/orders/models/OrderModel';
+import { OrderModel } from 'src/app/core/models/OrderModel';
 import { Subscription } from 'rxjs';
 import { getTotalSum, toLocaleString } from 'src/app/core/utils/helper-functions';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';

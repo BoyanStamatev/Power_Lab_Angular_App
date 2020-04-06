@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsModule } from '../products.module';
-import { ProductModel } from '../../../core/store/products/models/ProductModel';
+import { ProductModel } from '../../../core/models/ProductModel';
 import { animations } from './product-list.animation';
 
 @Component({
@@ -19,16 +19,10 @@ export class ProductListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   changePage(page) {
     this.currentPage = page
-  }
-
-  trackByIds(index: number, product: ProductModel): string {
-    return product._id
   }
 
 }

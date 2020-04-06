@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderModel } from 'src/app/core/store/orders/models/OrderModel';
+import { OrderModel } from 'src/app/core/models/OrderModel';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/app.state';
 import { BaseComponent } from '../../base.component';
@@ -47,7 +47,4 @@ export class UserOrdersComponent extends BaseComponent implements OnInit {
     this.currentPage = page
   }
 
-  trackByIds(order: OrderModel): string {
-    return order._id
-  }
 }

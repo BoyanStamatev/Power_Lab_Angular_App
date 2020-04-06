@@ -1,8 +1,6 @@
-export default class AuthenticationDataModel {
-    constructor (
-      public token: string,
-      public username: string,
-      public isAdmin: boolean,
-      public isAuthenticated: boolean
-    ) { }
-  }
+export interface AuthenticationDataModel {
+  token: string
+  username: string
+  isAdmin: boolean
+  isAuthenticated: boolean
+}

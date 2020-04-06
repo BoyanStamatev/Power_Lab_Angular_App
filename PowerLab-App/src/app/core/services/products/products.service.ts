@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
-import { ProductModel } from 'src/app/core/store/products/models/ProductModel';
+import { ProductModel } from 'src/app/core/models/ProductModel';
 import { ToastrService } from 'ngx-toastr';
 import { GetAllProducts, LikeProduct, 
   UnlikeProduct, CreateProducts, DeleteProduct, EditProduct } from '../../store/products/products.actions';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CreateProductModel } from '../../store/products/models/CreateProductsModel';
+import { CreateProductModel } from '../../models/CreateProductsModel';
 import { Router } from '@angular/router';
 
 
