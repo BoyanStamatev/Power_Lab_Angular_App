@@ -10,7 +10,7 @@
         </tr>
       </thead>
     <tbody>
-        <tr *ngFor="let pr of products;">
+        <tr [@products] *ngFor="let pr of products; trackBy: trackByIds">
          <td data-th="Product">
             <div class="row">
             <div class="col-sm-4 hidden-xs"><img src="{{pr.image}}" alt="Image" class="cart-image" /></div>
@@ -31,7 +31,7 @@
               value="{{pr.quantity}}"
               />
           </td>
-          <td data-th="Subtotal" class="text-center">price</td>
+          <td data-th="Subtotal" class="text-center">{{(pr.price * pr.quantity).toFixed(2)}}</td>
           <td class="actions" data-th="">
             <button class="btn btn-info btn-sm custom-button" (click)="onRefreshButtonClick(pr._id)"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger btn-sm" (click)="onDeleteButtonClick(pr._id)"><i class="fa fa-trash"></i></button>

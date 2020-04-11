@@ -25,7 +25,7 @@ export class JWTInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+        
         if(!req.url.endsWith('/auth/login') || !req.url.endsWith('/auth/signup')) {
 
             req = req.clone({

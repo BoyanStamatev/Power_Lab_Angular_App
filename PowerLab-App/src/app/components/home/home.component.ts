@@ -45,7 +45,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     const registerRef = this.modalService.open(RegisterModalComponent)
     registerRef.result.then((res) => {
       // console.log('(f)openRegisterModal :', res)
-
     }).catch((err) => {
       console.log('(f)openRegisterModal :', err)
 

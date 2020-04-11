@@ -37,7 +37,7 @@ export class CreateProductComponent implements OnInit {
   create() {
     if (this.createForm.invalid) { return }
 
-    const product: CreateProductModel = this.createForm.value
+    const product: CreateProductModel = Object.assign({}, this.createForm.value)
 
     this.productsService.createProduct(product)
   }

@@ -17,7 +17,7 @@ import { UndoOrdersRequestMade } from 'src/app/core/store/http/http.actions';
 })
 export class PendingOrdersComponent extends BaseComponent implements OnInit {
 
-  protected pageSize: number = 5
+  protected pageSize: number = 10
   protected currentPage: number = 1
   protected notFoundMessage = 'There are no pending orders at the moment.'
   protected getTotalSum = getTotalSum

@@ -45,7 +45,6 @@ export class LoginModalComponent extends BaseComponent implements OnInit {
 
     this.spinner.show()
     const formValue = this.loginForm.value
-    // const registerModel: RegisterModel = {username: formValue.username, email:formValue.email, password:formValue.password} 
     const loginModel: LoginModel = {email: formValue.email, password: formValue.password}
     this.subscription$ = this.authService.login(loginModel).subscribe(() => {
         this.spinner.hide()

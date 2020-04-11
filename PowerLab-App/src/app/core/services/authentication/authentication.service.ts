@@ -52,6 +52,7 @@ export class AuthenticationService {
       }
 
     }
+    
   }
 
   register(body: RegisterModel) {

@@ -89,4 +89,7 @@ export class CartComponent extends BaseComponent implements OnInit {
     this.ordersService.submitNewOrder(products)
   }
 
+  trackByIds(index: number, product: ProductInCartModel): string {
+    return product._id
+  }
 }

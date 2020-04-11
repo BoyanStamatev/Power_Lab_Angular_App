@@ -34,9 +34,7 @@ export class OrdersService {
 
   getUserOrders() {
     if (this.ordersRequestMade) { return }
-
     this.spinner.show()
-
     this.http.get<OrderModel[]>(baseUrl + 'user')
       .subscribe(orders => {
         this.store.dispatch(new GetUserOrders(orders))
@@ -57,7 +55,6 @@ export class OrdersService {
 
   getPendingOrders() {
     this.spinner.show()
-
     this.http.get<OrderModel[]>(`${baseUrl}pending`)
       .subscribe(orders => {
         this.store.dispatch(new GetPendingOrders(orders))
@@ -74,7 +71,6 @@ export class OrdersService {
 
   getApprovedOrders() {
     this.spinner.show()
-
     this.http.get<OrderModel[]>(`${baseUrl}approved`)
       .subscribe(orders => {
         this.store.dispatch(new GetApprovedOrders(orders))

@@ -34,8 +34,12 @@ import { Route } from '@angular/compiler/src/core'
    openLoginModal() {
      const loginRef = this.modalService.open(LoginModalComponent)
      loginRef.result
-     .then((results) => { console.log(results) })
-     .catch((error) => { console.log(error) })
+     .then((results) => { 
+      //  console.log(results) 
+      })
+     .catch((error) => { 
+       console.log(error) 
+      })
    }
  }
  

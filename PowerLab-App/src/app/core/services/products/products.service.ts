@@ -39,7 +39,8 @@ export class ProductsService {
 
     this.store.dispatch(new GetRequestBegin())
 
-    this.http.get<ProductModel[]>(baseUrl + 'all').subscribe(products => {
+    this.http.get<ProductModel[]>(baseUrl + 'all')
+    .subscribe(products => {
       this.productsCached = true
       this.cacheTime = new Date().getTime()
       this.store.dispatch(new GetAllProducts(products))
