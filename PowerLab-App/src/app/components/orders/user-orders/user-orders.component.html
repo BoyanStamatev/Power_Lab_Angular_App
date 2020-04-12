@@ -19,7 +19,7 @@
                   id: 'allOrders',
                   itemsPerPage: pageSize,
                   currentPage: currentPage
-                }; let i = index">
+                }; trackBy: trackByIds; let i = index">
                 <td>{{i + 1 + (currentPage-1)*5}}</td>
                 <td>{{toLocaleString(o.date)}}</td>
                 <td>$ {{getTotalSum(o.products).toFixed(2)}}</td>

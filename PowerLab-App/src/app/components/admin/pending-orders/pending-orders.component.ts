@@ -50,4 +50,7 @@ export class PendingOrdersComponent extends BaseComponent implements OnInit {
     this.ordersService.approveOrder(id)
   }
 
+  trackByIds(index: number, order: OrderModel): string {
+    return order._id
+  }
 }

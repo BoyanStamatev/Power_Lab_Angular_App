@@ -17,21 +17,21 @@
         </div>
       </form>
     </div>
-      <div class="col-md-8 review" [@reviews] *ngFor="let r of reviews">
+      <div class="col-md-8 review" [@reviews] *ngFor="let review of reviews; trackBy: trackByIds">
         <div class="card text-black bg-light">
           <div class="card-body">
             <blockquote class="card-blockquote">
-              <p class="h6">{{r.reviewText}}</p>
+              <p class="h6">{{review.reviewText}}</p>
               <button class="btn btn-danger float-right btn-sm custom-button" 
-              *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"
-              (click)="deleteReview(r._id)" ><i class="fa fa-trash"></i></button>
+              *ngIf="authService.isAdmin() || review.creatorUsername === authService.getUsername()"
+              (click)="deleteReview(review._id)" ><i class="fa fa-trash"></i></button>
               <button class="btn btn-warning float-right btn-sm custom-button" 
-              *ngIf="authService.isAdmin() || r.creatorUsername === authService.getUsername()"
-               (click)="openEditReviewModal(r._id)"><i class="fa fa-edit"></i></button>
+              *ngIf="authService.isAdmin() || review.creatorUsername === authService.getUsername()"
+               (click)="openEditReviewModal(review._id)"><i class="fa fa-edit"></i></button>
               <footer class="review-footer">
-                <cite class="text-capitalize footer-color">"{{r.creatorUsername}}"</cite>
+                <cite class="text-capitalize footer-color">"{{review.creatorUsername}}"</cite>
                 <span class="review-date footer-color">
-                  {{toLocaleString(r.lastModified)}}
+                  {{toLocaleString(review.lastModified)}}
                 </span>
               </footer>
             </blockquote>    

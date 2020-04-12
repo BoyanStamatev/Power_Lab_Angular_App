@@ -25,4 +25,7 @@ export class ProductListComponent implements OnInit {
     this.currentPage = page
   }
 
+  trackByIds(index: number, product: ProductModel): string {
+    return product._id
+  }
 }

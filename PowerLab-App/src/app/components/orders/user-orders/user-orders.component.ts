@@ -47,4 +47,7 @@ export class UserOrdersComponent extends BaseComponent implements OnInit {
     this.currentPage = page
   }
 
+  trackByIds(index: number, order: OrderModel): string {
+    return order._id
+  }
 }

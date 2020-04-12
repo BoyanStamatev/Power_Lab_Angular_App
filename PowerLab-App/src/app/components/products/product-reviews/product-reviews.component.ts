@@ -61,4 +61,8 @@ export class ProductReviewsComponent implements OnInit {
     })
   }
 
+  trackByIds(index: number, review: ReviewModel): string {
+    return review._id
+  }
+
 }
